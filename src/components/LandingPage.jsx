@@ -37,11 +37,12 @@ export default function LandingPage() {
 
   const loginAttempt = () => {
     const data = {
-      userEmail: email,
-      userPassword: password,
+      email: email,
+      password: password,
     };
 
-    axios.post('/users/login', data).then((response) => {
+    axios.post('http://localhost:3008/login', data).then((response) => {
+      console.log(response);
       // Inform user if they did not key in username or password
       if (response.data === 'details missing') {
         setMessage('Please enter an email and password');
