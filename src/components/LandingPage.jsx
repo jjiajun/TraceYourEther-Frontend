@@ -3,16 +3,18 @@ import React, { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../context';
 import LoginMessage from './LoginMessage';
+import Trial from './Trial';
+const {REACT_APP_BACKEND} = process.env
 
-export default function LandingPage() {
+export default function LandingPage({user}) {
   //React hook to change to home page on successful login
   const navigate = useNavigate();
-  const [user,setUser] = useState(null);
    // State and setter for login details
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // State and setter for signup and login message
   const [message, setMessage] = useState('');
+  
 
   const signUpAttempt = () => {
     //data to send to backend
@@ -20,9 +22,9 @@ export default function LandingPage() {
       userEmail : email ,
       userPassword : password,
     }
-    axios.post('route' , data).then((response)=>{
-      if (response.data === 'details missing') {
-        setMessage('Please enter an email and password');
+    axios.post(`${REACT_APP_BACKEND}/signup` , data).then((response)=>{
+      if (response.data === 'Something went wrong when creating a new user') {
+        setMessage('Something went wrong when creating a new user');
       }
       // Inform user if username already exists
       if (response.data === 'user exists') {
@@ -41,20 +43,22 @@ export default function LandingPage() {
       password: password,
     };
 
-    axios.post('http://localhost:3008/login', data).then((response) => {
+    axios.post(`${REACT_APP_BACKEND}/login`, data).then((response) => {
       console.log(response);
       // Inform user if they did not key in username or password
       if (response.data === 'details missing') {
         setMessage('Please enter an email and password');
       }
       // If username or password incorrect, inform player
-      if (response.data === 'username or password incorrect') {
+      if (response.data === 'The email or password is incorrect') {
         setMessage('Invalid login. Please try again.');
       }
       // If successful, redirect to home page
       if (response.data.success === true) {
         const { userId } = response.data;
-        setUser(userId);
+        console.log(' data user',userId)
+        user.userSetter(userId);
+        console.log('state user',user)
         // On successful login, redirect to home page
         navigate('/');
       }
@@ -64,7 +68,7 @@ export default function LandingPage() {
 
   return (
     <div id="landing-background">
-      <userContext.Provider value={user}>
+      
         <div className="loginBox">
           <p className="logo">
             <i className="fas fa-utensils" />
@@ -90,14 +94,16 @@ export default function LandingPage() {
               Sign Up
               {' '}
             </button>
+            
             <button className="btn login-btn" type="submit" onClick={loginAttempt}>
               Login
               {' '}
             </button>
+            <Trial />
           </div>
           <LoginMessage displayMessage={message} />
         </div>
-      </userContext.Provider>
+      
     </div>
   );
 }
