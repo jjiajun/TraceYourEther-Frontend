@@ -1,7 +1,4 @@
-import React,{useState,useEffect,useContext} from "react";
-import { userContext } from "../context";
-import axios from "axios";
-const {REACT_APP_BACKEND} = process.env
+import React from "react";
 
 export default function MakeRequest(friends) {
   console.log(friends)
