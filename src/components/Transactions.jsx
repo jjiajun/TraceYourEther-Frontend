@@ -1,23 +1,11 @@
 import React from "react";
+import TransactionBox from "./TransactionBox";
 
 export default function Transactions() {
   return (
     <div>
       <h1>Transactions</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>To/From</th>
-            <th>Requester</th>
-            <th>Amount</th>
-            <th>Date</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-        </tbody>
-      </table>
+      <TransactionBox />
     </div>
   )
 }
