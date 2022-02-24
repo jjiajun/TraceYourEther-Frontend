@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.loginBox {
+  background-color: #61dafb;
+}
+

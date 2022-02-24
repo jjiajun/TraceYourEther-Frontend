@@ -14,13 +14,18 @@ export default function LandingPage({user}) {
   const [password, setPassword] = useState('');
   // State and setter for signup and login message
   const [message, setMessage] = useState('');
+  const  [name , setName] = useState('')
+
+  const [signUpVisible , setSignUpVisible] = useState(false);
+  const [logInVisible , setLogInVisible] = useState(true);
   
 
   const signUpAttempt = () => {
     //data to send to backend
     const data = {
-      userEmail : email ,
-      userPassword : password,
+      email : email ,
+      password : password,
+      name : name,
     }
     axios.post(`${REACT_APP_BACKEND}/signup` , data).then((response)=>{
       if (response.data === 'Something went wrong when creating a new user') {
@@ -65,9 +70,14 @@ export default function LandingPage({user}) {
     });
   };
 
+  const toggleLogInSignUp = () =>{
+    setLogInVisible(!logInVisible)
+    setSignUpVisible(!signUpVisible)
+  }
 
-  return (
-    <div id="landing-background">
+  if (logInVisible) {
+    return (
+      <div id="landing-background">
       
         <div className="loginBox">
           <p className="logo">
@@ -75,6 +85,10 @@ export default function LandingPage({user}) {
             ZoomZoom
           </p>
           <div className="loginSmallBox">
+            <div>
+              <h2>Login</h2>
+              <h2 onClick={toggleLogInSignUp}>Sign Up</h2>
+            </div>
             <input
               name="email"
               id="email"
@@ -89,21 +103,109 @@ export default function LandingPage({user}) {
               onChange={(event) => setPassword(event.target.value)}
             />
           </div>
+          <div className="btn-container">            
+            <button className="btn login-btn" type="submit" onClick={loginAttempt}>
+              Login
+              {' '}
+            </button>
+          </div>
+            
+          <Message displayMessage={message} />
+        </div>
+      
+    </div>
+    )
+  }
+
+  if (signUpVisible) {
+    return (
+    <div id="landing-background">
+      
+        <div className="loginBox">
+          <p className="logo">
+            <i className="fas fa-utensils" />
+            ZoomZoom
+          </p>
+          <div className="loginSmallBox">
+            <div>
+              <h2 onClick={toggleLogInSignUp}>Login</h2>
+              <h2 >Sign Up</h2>
+            </div>
+            <input
+              name="email"
+              id="email"
+              placeholder="Email"
+              onChange={(event) => setEmail(event.target.value)}
+            />
+            <input
+              name="password"
+              id="password"
+              type="password"
+              placeholder="Password"
+              onChange={(event) => setPassword(event.target.value)}
+            />
+            <input
+              name="name"
+              id="name"
+              type="name"
+              placeholder="Name"
+              onChange={(event) => setName(event.target.value)}
+            />
+          </div>
           <div className="btn-container">
             <button className="btn sub-btn" type="submit" onClick={signUpAttempt}>
               Sign Up
               {' '}
             </button>
             
-            <button className="btn login-btn" type="submit" onClick={loginAttempt}>
-              Login
-              {' '}
-            </button>
-            <Trial />
           </div>
+            
           <Message displayMessage={message} />
         </div>
       
     </div>
   );
+  }
+
+  // return (
+  //   <div id="landing-background">
+      
+  //       <div className="loginBox">
+  //         <p className="logo">
+  //           <i className="fas fa-utensils" />
+  //           ZoomZoom
+  //         </p>
+  //         <div className="loginSmallBox">
+  //           <input
+  //             name="email"
+  //             id="email"
+  //             placeholder="Email"
+  //             onChange={(event) => setEmail(event.target.value)}
+  //           />
+  //           <input
+  //             name="password"
+  //             id="password"
+  //             type="password"
+  //             placeholder="Password"
+  //             onChange={(event) => setPassword(event.target.value)}
+  //           />
+  //         </div>
+  //         <div className="btn-container">
+  //           <button className="btn sub-btn" type="submit" onClick={signUpAttempt}>
+  //             Sign Up
+  //             {' '}
+  //           </button>
+            
+  //           <button className="btn login-btn" type="submit" onClick={loginAttempt}>
+  //             Login
+  //             {' '}
+  //           </button>
+  //           <Trial />
+  //         </div>
+            
+  //         <Message displayMessage={message} />
+  //       </div>
+      
+  //   </div>
+  // );
 }
