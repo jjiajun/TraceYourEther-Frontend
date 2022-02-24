@@ -8,6 +8,7 @@ import Requests from './components/Requests';
 import Transactions from './components/Transactions';
 import Profile from './components/Profile';
 import { userContext } from './context';
+import AddFriend from './components/AddFriend';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/requests" element= {<Requests/>} />
           <Route path="/transactions" element= {<Transactions/>} />
           <Route path="/profile" element = {<Profile/>} />
+          <Route path="/addfriend" element = {<AddFriend/>} />
         </Route>
       </Routes>
       </userContext.Provider>

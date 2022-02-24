@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../context';
-import LoginMessage from './LoginMessage';
+import Message from './Message';
 import Trial from './Trial';
 const {REACT_APP_BACKEND} = process.env
 
@@ -101,7 +101,7 @@ export default function LandingPage({user}) {
             </button>
             <Trial />
           </div>
-          <LoginMessage displayMessage={message} />
+          <Message displayMessage={message} />
         </div>
       
     </div>

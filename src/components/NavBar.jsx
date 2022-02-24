@@ -1,6 +1,7 @@
 import React from "react";
 import {Outlet, Link} from "react-router-dom"
 
+
 export default function NavBar() {
   return(
     <div>
@@ -11,7 +12,7 @@ export default function NavBar() {
           <Link to='/requests'>Requests</Link>
           <Link to='/Transactions'>Transactions</Link>
           <Link to='/Profile'>Profile</Link>
-
+          <Link to='/addfriend'>Add Friend</Link>
         </nav>
       </div>
       <Outlet/>
