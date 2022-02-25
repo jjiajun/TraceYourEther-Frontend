@@ -26,3 +26,7 @@ Hardhat Introduction.
 Every time you're running Hardhat from the CLI, you are running a task. E.g. "npx hardhat compile" is running the "compile" task.
 
 Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser
+
+Nonce too high error:
+
+- Solve it by going to MetaMask > Settings > Advanced > Reset

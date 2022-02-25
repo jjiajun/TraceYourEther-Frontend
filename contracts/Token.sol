@@ -7,10 +7,13 @@ contract Token {
   string public name = "DOM Token";
   string public symbol = "DMO";
   uint public totalSupply = 1000000;
+  // An address type variable is used to store ethereum accounts.
+  address public owner;
   mapping(address => uint) balances;
 
   constructor() {
     balances[msg.sender] = totalSupply;
+    owner = msg.sender;
   }
 
   function transfer(address to, uint amount) external {
