@@ -177,6 +177,7 @@ export async function approveRequest(requestId) {
 
     if (userAddress.toLowerCase() !== payerAddress.toLowerCase()) {
       console.log("You are not the correct payer");
+      return;
     }
 
     // request access to wallet
