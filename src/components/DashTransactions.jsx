@@ -1,10 +1,10 @@
 import React from "react";
 import TransactionBox from "./TransactionBox";
 
-export default function Transactions() {
+export default function DashTransactions () {
   return (
     <div>
-      <h1>Transactions</h1>
+      <h1>Dash Transactions</h1>
       <TransactionBox />
     </div>
   )
