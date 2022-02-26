@@ -14,7 +14,8 @@ export default function LandingPage({user}) {
   const [password, setPassword] = useState('');
   // State and setter for signup and login message
   const [message, setMessage] = useState('');
-  const  [name , setName] = useState('')
+  const  [name , setName] = useState('');
+  const [address, setAddress] = useState('');
 
   const [signUpVisible , setSignUpVisible] = useState(false);
   const [logInVisible , setLogInVisible] = useState(true);
@@ -26,6 +27,7 @@ export default function LandingPage({user}) {
       email : email ,
       password : password,
       name : name,
+      address : address,
     }
     axios.post(`${REACT_APP_BACKEND}/signup` , data).then((response)=>{
       if (response.data === 'Something went wrong when creating a new user') {
@@ -147,9 +149,14 @@ export default function LandingPage({user}) {
             <input
               name="name"
               id="name"
-              type="name"
               placeholder="Name"
               onChange={(event) => setName(event.target.value)}
+            />
+            <input
+              name="address"
+              id="address"
+              placeholder="Address"
+              onChange={(event) => setAddress(event.target.value)}
             />
           </div>
           <div className="btn-container">
