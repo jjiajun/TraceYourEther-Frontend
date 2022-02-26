@@ -12,6 +12,7 @@ import {
   getBalance,
   createRequest,
   getAllRequestsForPayer,
+  getAllRequestsForPayee,
   approveRequest,
 } from "./solidityMethods";
 
@@ -40,7 +41,8 @@ function App() {
       >
         Create Request
       </button>
-      <button onClick={getAllRequestsForPayer}>Get All Requests</button>
+      <button onClick={getAllRequestsForPayer}>Get All Requests For You</button>
+      <button onClick={getAllRequestsForPayee}>Get All Requests by You</button>
       <button onClick={() => approveRequest(0)}>Approve Request</button>
     </div>
   );

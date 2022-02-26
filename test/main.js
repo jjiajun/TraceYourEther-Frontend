@@ -75,6 +75,7 @@ describe("Main contract", function () {
         }
         return arrayOfRequestObjs;
       }
+      // const array2 = await getAllRequestsByPayer(addr2.address);
       const array2 = await getAllRequestsByPayer(addr2.address);
 
       console.log("array2", array2);
@@ -85,7 +86,7 @@ describe("Main contract", function () {
     it("Should transfer eth between accounts", async function () {
       // owner request 1 eth from addr2
       await mainContract.createRequest(
-        addr2.address,
+        "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc",
         999,
         "requesting 999 eth to test"
       );
