@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import Main from "./artifacts/contracts/main.sol/Main.json";
-const mainContractAddress = "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0";
+const mainContractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
+// need to update this whenever you deploy the contract
 
 // const [me] = await hre.ethers.getSigners();
 
@@ -40,7 +41,7 @@ export async function createRequest(address, amount, description) {
     const contract = new ethers.Contract(mainContractAddress, Main.abi, signer);
     console.log("CONTRACT: ", contract);
     // call createRequest method from main.sol
-    await contract.createRequest(address, amount, description);
+    await contract.createRequest(address.toLowerCase(), amount, description);
     console.log("CONTRACT: ", contract);
     console.log(`request created (${address}, ${amount}, ${description})`);
   }
@@ -156,24 +157,43 @@ export async function getAllRequestsForPayee() {
 // Send 1 ether to an address / ens name
 export async function approveRequest(requestId) {
   if (typeof window.ethereum !== "undefined") {
-    // request access to wallet
-    await requestAccount();
+    const requestDetails = await getRequestDetails(requestId);
+    console.log("requestDetails: ", requestDetails);
+    const payerAddress = requestDetails.payerAddress;
+    const payeeAddress = requestDetails.payeeAddress;
+    const amount = requestDetails.amount;
+
+    // get address of user
+    const [userAddress] = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
     // set provider
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const balance = await provider.getBalance(userAddress);
+    // return balance;
+    console.log("balance: ", balance.toString());
+    console.log("userAddress: ", userAddress);
+    console.log("payerAddress: ", payerAddress);
+
+    if (userAddress.toLowerCase() !== payerAddress.toLowerCase()) {
+      console.log("You are not the correct payer");
+    }
+
+    // request access to wallet
+    await requestAccount();
     // get signer
     const signer = provider.getSigner();
     // get contract. We need to add "signer" as the third argument instead of "provider" in order to enable transaction on the blockchain to take place
     const contract = new ethers.Contract(mainContractAddress, Main.abi, signer);
+    await signer.sendTransaction({
+      to: payeeAddress,
+      value: ethers.utils.parseEther(amount.toString()),
+    });
 
-    const requestDetails = await getRequestDetails(requestId);
-    const payeeAddress = requestDetails.payeeAddress;
-    const amount = requestDetails.amount;
-
-    // await signer.sendTransaction({
-    //   to: payeeAddress,
-    //   value: ethers.utils.parseEther(amount.toString()),
-    // });
-    console.log("signer: ", signer);
     await contract.markAsApproved(requestId);
+
+    const balance2 = await provider.getBalance(userAddress);
+    // return balance;
+    console.log("balance: ", balance2.toString());
   }
 }

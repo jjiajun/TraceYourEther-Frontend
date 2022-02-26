@@ -30,6 +30,7 @@ function App() {
       </Routes>
       {/* Temporary buttons to trigger solidity methods*/}
       <button onClick={getBalance}>Get Balance</button>
+      {/* replace arguments with actual request details */}
       <button
         onClick={() =>
           createRequest(
@@ -43,6 +44,7 @@ function App() {
       </button>
       <button onClick={getAllRequestsForPayer}>Get All Requests For You</button>
       <button onClick={getAllRequestsForPayee}>Get All Requests by You</button>
+      {/* replace "0" with id of request to approve */}
       <button onClick={() => approveRequest(0)}>Approve Request</button>
     </div>
   );
