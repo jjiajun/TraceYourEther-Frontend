@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
-import Main from "./artifacts/contracts/Main.sol/Main.json"; // need to update this whenever you deploy the contract
-const mainContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+import Main from "./artifacts/contracts/main.sol/Main.json"; // need to update this whenever you deploy the contract
+const mainContractAddress = "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512";
 
 /** Request access to wallet - this is needed for transactions that happen on the blockchain */
 export async function requestAccount() {
@@ -39,12 +39,13 @@ export async function createRequest(address, amount, description) {
     const contract = new ethers.Contract(mainContractAddress, Main.abi, signer);
     console.log("CONTRACT: ", contract);
     // call createRequest method from main.sol
+    console.log("address: ", address);
     await contract.createRequest(address.toLowerCase(), amount, description);
     console.log("CONTRACT: ", contract);
     console.log(`request created (${address}, ${amount}, ${description})`);
   }
 }
-
+// 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
 /** Returns promise with request details
  * Keys: payeeAddress, amount, description, approved, completed
  */
