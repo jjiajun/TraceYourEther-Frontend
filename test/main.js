@@ -113,7 +113,7 @@ describe("Main contract", function () {
       }
 
       // Send 1 ether to an address / ens name.
-      async function approveRequest(requestId, payer) {
+      async function approveRequest(requestId) {
         const requestDetails = await getRequestDetails(requestId);
         const payeeAddress = requestDetails.payeeAddress;
         const amount = requestDetails.amount;
@@ -128,11 +128,16 @@ describe("Main contract", function () {
         await mainContract.markAsApproved(requestId);
       }
 
-      await approveRequest(0, addr2);
+      await approveRequest(0);
 
       const ownerBalance2 = await provider.getBalance(owner.address);
 
       console.log("OWNER BALANCE AFTER TRF: ", ownerBalance2);
+
+      // Send 1 ether to an address / ens name.
+      async function rejectRequest(requestId) {
+        await mainContract.markAsRejected(requestId);
+      }
     });
   });
 });

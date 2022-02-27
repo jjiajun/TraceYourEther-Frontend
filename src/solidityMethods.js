@@ -169,32 +169,48 @@ export async function approveRequest(requestId) {
     });
     // set provider
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const balance = await provider.getBalance(userAddress);
-    // return balance;
-    console.log("balance: ", balance.toString());
-    console.log("userAddress: ", userAddress);
-    console.log("payerAddress: ", payerAddress);
-
+    // log that user is incorrect and break the code here
     if (userAddress.toLowerCase() !== payerAddress.toLowerCase()) {
       console.log("You are not the correct payer");
       return;
     }
-
-    // request access to wallet
-    await requestAccount();
     // get signer
     const signer = provider.getSigner();
     // get contract. We need to add "signer" as the third argument instead of "provider" in order to enable transaction on the blockchain to take place
     const contract = new ethers.Contract(mainContractAddress, Main.abi, signer);
+    // send x esther to payee address
     await signer.sendTransaction({
       to: payeeAddress,
       value: ethers.utils.parseEther(amount.toString()),
     });
-
+    // mark request.approved = 1, mark request.completed = true
     await contract.markAsApproved(requestId);
+    console.log("Request approved");
+  }
+}
 
-    const balance2 = await provider.getBalance(userAddress);
-    // return balance;
-    console.log("balance: ", balance2.toString());
+// Reject request - mark request as rejected
+export async function rejectRequest(requestId) {
+  if (typeof window.ethereum !== "undefined") {
+    const requestDetails = await getRequestDetails(requestId);
+    // Get payerAddress to verify if user is the payer of this request
+    const payerAddress = requestDetails.payerAddress;
+    // get address of user + request access to wallet
+    const [userAddress] = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    // log that user is incorrect and break the code here
+    if (userAddress.toLowerCase() !== payerAddress.toLowerCase()) {
+      console.log("You are not the correct payer");
+      return;
+    }
+    // set provider
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // get signer
+    const signer = provider.getSigner();
+    // get contract. We need to add "signer" as the third argument instead of "provider" in order to enable transaction on the blockchain to take place
+    const contract = new ethers.Contract(mainContractAddress, Main.abi, signer);
+    // mark request.approved = 2, mark request.completed = true;
+    await contract.markAsRejected(requestId);
   }
 }

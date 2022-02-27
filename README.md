@@ -30,3 +30,15 @@ Mocha is a feature-rich JavaScript test framework running on Node.js and in the 
 Nonce too high error:
 
 - Solve it by going to MetaMask > Settings > Advanced > Reset
+
+How to get all past events:
+// let eventFilter = contract.filters.EventName();
+// let events = await contract.queryFilter(eventFilter);
+// events.forEach((e) => {
+// e.
+// console.log(e.args.amount);
+// console.log(e.args.description);
+// });
+// // console.log("Events: ", events,);
+// }
+// }

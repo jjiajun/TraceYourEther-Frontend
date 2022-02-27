@@ -14,6 +14,8 @@ import {
   getAllRequestsForPayer,
   getAllRequestsForPayee,
   approveRequest,
+  rejectRequest,
+  getAllPastRequests,
 } from "./solidityMethods";
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
       <button onClick={getAllRequestsForPayee}>Get All Requests by You</button>
       {/* replace "0" with id of request to approve */}
       <button onClick={() => approveRequest(0)}>Approve Request</button>
+      <button onClick={() => rejectRequest(0)}>Reject Request</button>
+      {/* <button onClick={getAllPastRequests}>Get All Past Requests</button> */}
     </div>
   );
 }

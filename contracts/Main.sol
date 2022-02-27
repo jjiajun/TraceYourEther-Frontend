@@ -100,8 +100,9 @@ contract Main is Ownable {
 
     /** Mark request as approved & completed */
     function markAsApproved(uint _requestId) public {
-        address _payeeAddress = requestToPayee[_requestId];
         Request storage myRequest = requests[_requestId];
+        require(msg.sender == myRequest.payerAddress);
+        address _payeeAddress = myRequest.payeeAddress;
         uint256 _paymentAmount = myRequest.amount;
         string memory _paymentDescription = myRequest.description;
 
@@ -120,8 +121,9 @@ contract Main is Ownable {
     }
 
     /** Send ether to payee + mark request as approved & completed */
-    function rejectRequest(uint _requestId) public {
+    function markAsRejected(uint _requestId) public {
         Request storage myRequest = requests[_requestId];
+        require(msg.sender == myRequest.payerAddress);
         /** Everytime a request is rejected, update Request.approved as 2 & Request.completed as true */
         myRequest.approved = 2;
         myRequest.completed = true;

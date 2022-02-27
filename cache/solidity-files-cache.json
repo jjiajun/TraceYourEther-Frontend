@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/tristan/Documents/bootcamp/milestone-projects/cryptopay-frontend/contracts/main.sol": {
-      "lastModificationDate": 1645771238153,
-      "contentHash": "e27b6741f48ca9334e266413953c0f72",
+      "lastModificationDate": 1645943537539,
+      "contentHash": "52858e00014d97142746b818adc40233",
       "sourceName": "contracts/main.sol",
       "solcConfig": {
         "version": "0.8.4",
