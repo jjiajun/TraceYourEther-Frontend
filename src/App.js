@@ -25,7 +25,7 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="/requests" element={<Requests />} />
             <Route path="/transactions" element={<Transactions />} />
-            <Route path="/profile" element={<Profile />} />
+            {/* <Route path="/profile" element={<Profile />} /> */}
             <Route path="/addfriend" element={<AddFriend />} />
           </Route>
         </Routes>

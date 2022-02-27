@@ -104,6 +104,7 @@ export async function getAllRequestsForPayer() {
         description: request.description,
         approved: request.approved,
         completed: request.completed,
+        timestamp: request.timestamp,
       };
       arrayOfRequestObjs.push(requestObj);
     }
@@ -145,6 +146,7 @@ export async function getAllRequestsForPayee() {
         description: request.description,
         approved: request.approved,
         completed: request.completed,
+        timestamp: request.timestamp,
       };
       arrayOfRequestObjs.push(requestObj);
     }
