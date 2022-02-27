@@ -2,12 +2,14 @@ import axios from "axios";
 import React, {useState,useContext} from "react";
 import { userContext } from "../context";
 import Message from "./Message"
+import { createRequest } from "../solidityMethods";
 const {REACT_APP_BACKEND} = process.env
 
 export default function MakeRequest(friends) {
   console.log(friends)
   const [amount,setAmount] = useState('');
   const [description , setDescription] = useState('');
+  const [friendWallet, setFriendWallet] = useState('');
 
  
   if(!friends.friends) return <div />;
@@ -19,24 +21,25 @@ export default function MakeRequest(friends) {
     )
   }
   const friendOptions = friends.friends.map((friend,index)=>(
-         <option key={index} value={`${friend._id}`}>{`${friend.name}`}</option>
+         <option key={index} value={`${friend.address}`}>{`${friend.name}`}</option>
   ))
   console.log('fri',friendOptions)
 
     const requestAttempt = () => {
-
+      console.log('makereq',amount,description,friendWallet)
+      createRequest(friendWallet,amount,description)
     }
 
   return(
     <div>
-      <select id='friends'>
+      <select id='friends' onChange={(event) => setFriendWallet(event.target.value)}>
         {friendOptions}
       </select>
       <input
             name="amount"
             id="amount"
             placeholder="Amount"
-            onChange={(event) => setAmount(event.target.value)}
+            onChange={(event) => setAmount(Number(event.target.value))}
           />
       <input
             name="description"
