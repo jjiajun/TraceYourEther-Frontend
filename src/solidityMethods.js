@@ -1,9 +1,6 @@
 import { ethers } from "ethers";
-import Main from "./artifacts/contracts/main.sol/Main.json";
-const mainContractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
-// need to update this whenever you deploy the contract
-
-// const [me] = await hre.ethers.getSigners();
+import Main from "./artifacts/contracts/Main.sol/Main.json"; // need to update this whenever you deploy the contract
+const mainContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 /** Request access to wallet - this is needed for transactions that happen on the blockchain */
 export async function requestAccount() {
@@ -19,8 +16,9 @@ export async function getBalance() {
     console.log("account: ", userAddress);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const balance = await provider.getBalance(userAddress);
-    // return balance;
-    console.log("balance: ", balance.toString());
+    const intBalance = parseInt(balance);
+    console.log("balance: ", intBalance);
+    return { userAddress, intBalance };
   }
 }
 
@@ -87,6 +85,7 @@ export async function getAllRequestsForPayer() {
       Main.abi,
       provider
     );
+    console.log(userAddress);
     // get array of payer requests
     const allPayerRequests = await contract.getAllPayerRequests(userAddress);
     console.log("allPayerRequests", allPayerRequests);
