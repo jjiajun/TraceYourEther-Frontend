@@ -95,6 +95,11 @@ export async function getAllRequestsForPayer() {
     // loop through array to return array of requestObjs
     for (let i = 0; i < allPayerRequests.length; i += 1) {
       const request = await getRequestDetails(i);
+      // convert timestamp to UTCString()
+      const timestamp = request.timestamp;
+      const newDate = new Date();
+      newDate.setTime(timestamp * 1000);
+      const dateString = newDate.toUTCString();
       // create requestObj for each i to push into array
       const requestObj = {
         id: allPayerRequests[i].toNumber(),
@@ -104,9 +109,9 @@ export async function getAllRequestsForPayer() {
         description: request.description,
         approved: request.approved,
         completed: request.completed,
-        timestamp: request.timestamp,
+        timestamp: dateString,
+        noOfSecSinceEpoch: request.timestamp.toNumber(),
       };
-      arrayOfRequestObjs.push(requestObj);
     }
 
     console.log("arrayOfRequestObjs: ", arrayOfRequestObjs);
@@ -137,6 +142,11 @@ export async function getAllRequestsForPayee() {
     // loop through array to return array of requestObjs
     for (let i = 0; i < allPayeeRequests.length; i += 1) {
       const request = await getRequestDetails(i);
+      // convert timestamp to UTCString()
+      const timestamp = request.timestamp;
+      const newDate = new Date();
+      newDate.setTime(timestamp * 1000);
+      const dateString = newDate.toUTCString();
       // create requestObj for each i to push into array
       const requestObj = {
         id: allPayeeRequests[i].toNumber(),
@@ -146,7 +156,8 @@ export async function getAllRequestsForPayee() {
         description: request.description,
         approved: request.approved,
         completed: request.completed,
-        timestamp: request.timestamp,
+        timestamp: dateString,
+        noOfSecSinceEpoch: request.timestamp.toNumber(),
       };
       arrayOfRequestObjs.push(requestObj);
     }
