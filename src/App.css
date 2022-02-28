@@ -36,3 +36,39 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .navbar-icon {
+    @apply relative flex flex-col items-center justify-center align-middle h-20 w-28 my-auto hover:text-primary rounded-md font-medium;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  h5 {
+    @apply text-base text-gray-300;
+  }
+
+  .btn {
+    @apply bg-primary text-gray-100 py-1 px-2 rounded-lg shadow-lg mx-4 text-sm;
+  }
+
+  .approve-btn {
+    @apply bg-primary;
+  }
+
+  .reject-btn {
+    @apply bg-secondary text-gray-900;
+  }
+}

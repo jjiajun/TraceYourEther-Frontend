@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
 import TransactionBox from "./TransactionBox";
 import {
   getAllRequestsForPayee,
   getAllRequestsForPayer,
 } from "../solidityMethods";
-import DashBalance from "./DashBalance";
-import Profile from "./Profile";
+import { refreshContext } from "../context";
 
-const { REACT_APP_BACKEND } = process.env;
-
-export default function Transactions() {
+export default function DashTransactions() {
   const [transactionList, setTransactionList] = useState("");
+  const refresh = useContext(refreshContext);
   useEffect(() => {
     getAllRequestsForPayer().then((response) => {
       console.log("test", response);
@@ -26,18 +23,20 @@ export default function Transactions() {
         holding.sort(function (a, b) {
           return Number(b.noOfSecSinceEpoch) - Number(a.noOfSecSinceEpoch);
         });
-        setTransactionList(holding);
+        const fiveTransac = [];
+        for (let i = 0; i < holding.length; i += 1) {
+          if (i > 4) break;
+          fiveTransac.push(holding[i]);
+        }
+        setTransactionList(fiveTransac);
         console.log(transactionList);
       });
     });
-  }, []);
+  }, [refresh.state]);
   return (
-    <div className="bg-primary text-white">
-      <Profile />
-      <DashBalance />
-      <div className="bg-white text-gray-900 py-8 rounded-t-3xl ">
-        <TransactionBox transactions={transactionList} />
-      </div>
+    <div className="flex flex-col w-screen bg-white py-3 px-5 text-gray-900 flex-grow overflow-auto mb-20">
+      <h3 className="font-bold mb-3">Latest Transactions</h3>
+      <TransactionBox transactions={transactionList} />
     </div>
   );
 }

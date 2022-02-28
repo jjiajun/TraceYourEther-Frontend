@@ -1,102 +1,50 @@
-import axios from 'axios';
-import React, { useState,useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { userContext } from '../context';
-import LoginMessage from './LoginMessage';
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import LoginBox from "./LoginBox";
+import SignupBox from "./SignupBox";
+const { REACT_APP_BACKEND } = process.env;
 
-export default function LandingPage() {
-  //React hook to change to home page on successful login
-  const navigate = useNavigate();
-  const [user,setUser] = useState(null);
-   // State and setter for login details
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  // State and setter for signup and login message
-  const [message, setMessage] = useState('');
+export default function LandingPage({ user }) {
+  const [signUpVisible, setSignUpVisible] = useState(false);
+  const [logInVisible, setLogInVisible] = useState(true);
 
-  const signUpAttempt = () => {
-    //data to send to backend
-    const data = {
-      userEmail : email ,
-      userPassword : password,
-    }
-    axios.post('route' , data).then((response)=>{
-      if (response.data === 'details missing') {
-        setMessage('Please enter an email and password');
-      }
-      // Inform user if username already exists
-      if (response.data === 'user exists') {
-        setMessage('Username taken. Please try a different username.');
-      }
-      // If successful, inform user to login
-      if (response.data === 'sign up success') {
-        setMessage('Sign up successful, please login!');
-      }
-    })
-  }
-
-  const loginAttempt = () => {
-    const data = {
-      userEmail: email,
-      userPassword: password,
-    };
-
-    axios.post('/users/login', data).then((response) => {
-      // Inform user if they did not key in username or password
-      if (response.data === 'details missing') {
-        setMessage('Please enter an email and password');
-      }
-      // If username or password incorrect, inform player
-      if (response.data === 'username or password incorrect') {
-        setMessage('Invalid login. Please try again.');
-      }
-      // If successful, redirect to home page
-      if (response.data.success === true) {
-        const { userId } = response.data;
-        setUser(userId);
-        // On successful login, redirect to home page
-        navigate('/');
-      }
-    });
+  const toggleLogIn = () => {
+    setLogInVisible(true);
+    setSignUpVisible(false);
+  };
+  const toggleSignUp = () => {
+    setLogInVisible(false);
+    setSignUpVisible(true);
   };
 
-
   return (
-    <div id="landing-background">
-      <userContext.Provider value={user}>
-        <div className="loginBox">
-          <p className="logo">
-            <i className="fas fa-utensils" />
-            ZoomZoom
-          </p>
-          <div className="loginSmallBox">
-            <input
-              name="email"
-              id="email"
-              placeholder="Email"
-              onChange={(event) => setEmail(event.target.value)}
-            />
-            <input
-              name="password"
-              id="password"
-              type="password"
-              placeholder="Password"
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </div>
-          <div className="btn-container">
-            <button className="btn sub-btn" type="submit" onClick={signUpAttempt}>
-              Sign Up
-              {' '}
-            </button>
-            <button className="btn login-btn" type="submit" onClick={loginAttempt}>
-              Login
-              {' '}
-            </button>
-          </div>
-          <LoginMessage displayMessage={message} />
+    <div className="flex flex-grow bg-primary text-gray-900 items-center justify-center">
+      <div className="">
+        <div className="text-7xl font-mono font-bold mb-12 text-white">
+          Trace<span className="text-secondary">YourEther</span>
         </div>
-      </userContext.Provider>
+        <div className="flex justify-center">
+          <div className=" shadow-background w-96 h-80 rounded-lg bg-white my-5">
+            <div className="flex flex-row justify-center">
+              <h6
+                className="bg-primary w-2/4 text-2xl p-2 border-l-2 border-t-2 rounded-tl-lg text-white"
+                onClick={toggleLogIn}
+              >
+                Log In
+              </h6>
+              <h6
+                className="bg-primary w-2/4 text-2xl p-2 border-r-2 border-t-2 rounded-tr-lg text-white"
+                onClick={toggleSignUp}
+              >
+                Sign Up
+              </h6>
+            </div>
+            {logInVisible && <LoginBox user={user} />}
+            {signUpVisible && <SignupBox />}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
