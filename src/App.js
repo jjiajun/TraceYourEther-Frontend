@@ -17,7 +17,7 @@ function App() {
     userSetter: setUserId,
   };
   return (
-    <div className="App">
+    <div className="App flex flex-col h-screen">
       <userContext.Provider value={userId}>
         <Routes>
           <Route exact path="/main" element={<LandingPage user={userData} />} />
