@@ -8,8 +8,9 @@ import {
   getAllRequestsForPayer,
   getAllRequestsForPayee,
 } from "../solidityMethods";
-import { setRequestContext } from "../context";
+import { refreshContext } from "../context";
 import Trial from "./Trial";
+
 const { REACT_APP_BACKEND } = process.env;
 
 export default function Requests() {
@@ -17,18 +18,16 @@ export default function Requests() {
   const [friendList, setFriendList] = useState();
   const [inRequestList, setInRequestList] = useState();
   const [outRequestList, setOutRequestList] = useState();
-  console.log(id);
-  const [refresh, setRefresh] = useState(true);
+  const [refresh, useRefresh] = useState(true);
   const data = {
     state: refresh,
-    setter: setRefresh,
+    setter: useRefresh,
   };
 
   useEffect(() => {
     axios
       .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
       .then((response) => {
-        console.log("TEST RESPONSE: ", response.data);
         setFriendList(response.data.userProfile.friends);
         console.log(friendList);
       });
@@ -44,12 +43,14 @@ export default function Requests() {
       );
       setOutRequestList(existingReq);
     });
+    console.log("triggered");
   }, [refresh]);
-  console.log(refresh);
+
   return (
     <div>
       <h1>Requests</h1>
-      <setRequestContext.Provider value={data}>
+
+      <refreshContext.Provider value={data}>
         {refresh && <Trial />}
         <MakeRequest friends={friendList} />
         <InRequestBox
@@ -57,7 +58,7 @@ export default function Requests() {
           setInRequest={setInRequestList}
         />
         <OutRequestBox requests={outRequestList} />
-      </setRequestContext.Provider>
+      </refreshContext.Provider>
     </div>
   );
 }

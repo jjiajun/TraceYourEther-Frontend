@@ -1,8 +1,13 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
+<<<<<<< HEAD
     "/Users/tristan/Documents/bootcamp/milestone-projects/project_5_FE/contracts/Main.sol": {
       "lastModificationDate": 1646031089372,
+=======
+    "/home/dom/bootcamp/eth_project_5/contracts/Main.sol": {
+      "lastModificationDate": 1645950558494,
+>>>>>>> 097dd584b4789a8d764be1b73d5ac88f138e8c87
       "contentHash": "52858e00014d97142746b818adc40233",
       "sourceName": "contracts/Main.sol",
       "solcConfig": {

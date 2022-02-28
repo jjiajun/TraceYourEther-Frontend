@@ -1,28 +1,38 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TransactionBox from "./TransactionBox";
-import { getAllRequestsForPayee, getAllRequestsForPayer } from "../solidityMethods";
+import {
+  getAllRequestsForPayee,
+  getAllRequestsForPayer,
+} from "../solidityMethods";
 
-const {REACT_APP_BACKEND} = process.env
+const { REACT_APP_BACKEND } = process.env;
 
 export default function Transactions() {
-  const [transactionList,setTransactionList] = useState('')
+  const [transactionList, setTransactionList] = useState("");
   useEffect(() => {
-    
-    getAllRequestsForPayer().then((response)=>{
-      console.log('test',response)
-      const existingReqPayer = response.filter((request)=>request.completed === true)
-      getAllRequestsForPayee().then((responsePayee)=>{
-      const existingReqPayee = responsePayee.filter((request)=>request.completed === true)
-      setTransactionList([...existingReqPayee,...existingReqPayer].sort((a,b)=>{return b.timestamp-a.timestamp}))
-      
-    })
-    })
-    },[])
+    getAllRequestsForPayer().then((response) => {
+      console.log("test", response);
+      const existingReqPayer = response.filter(
+        (request) => request.completed === true && request.approved === 1
+      );
+      getAllRequestsForPayee().then((responsePayee) => {
+        const existingReqPayee = responsePayee.filter(
+          (request) => request.completed === true && request.approved === 1
+        );
+        let holding = [...existingReqPayee, ...existingReqPayer];
+        holding.sort(function (a, b) {
+          return Number(b.noOfSecSinceEpoch) - Number(a.noOfSecSinceEpoch);
+        });
+        setTransactionList(holding);
+        console.log(transactionList);
+      });
+    });
+  }, []);
   return (
     <div>
       <h1>Transactions</h1>
-      <TransactionBox transactions = {transactionList}/>
+      <TransactionBox transactions={transactionList} />
     </div>
-  )
+  );
 }
