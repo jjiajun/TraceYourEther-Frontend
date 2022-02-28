@@ -33,6 +33,7 @@ export default function MakeRequest(friends) {
   return(
     <div>
       <select id='friends' onChange={(event) => setFriendWallet(event.target.value)}>
+        <option>Choose friend</option>
         {friendOptions}
       </select>
       <input
