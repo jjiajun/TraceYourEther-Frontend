@@ -21,10 +21,13 @@ export default function AddFriend(){
 
   console.log(profileData)
   return(
-    <div>
-      <h1>Add Friend</h1>
-      <FriendBox/>
-      {profileData && <FriendList friends= {profileData} />}
+    <div className="flex-grow bg-primary text-white">
+        <h1>Add Friend</h1>
+        <FriendBox/>
+      <div className="flex flex-col w-screen bg-white py-5 px-5 rounded-3xl text-gray-900 " >
+
+        {profileData && <FriendList friends= {profileData} />}
+      </div>
     </div>
   )
 }
