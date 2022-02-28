@@ -3,11 +3,13 @@ import OutRequest from "./OutRequest";
 
 export default function OutRequestBox(requests) {
   if (!requests.requests) return <div />;
-  console.log(requests);
+  console.log("ALL OUT REQUESTS: ", requests);
   if (!requests.requests[0]) {
     return (
       <div className="bg-white">
-        <h2>You haven't asked anyone to give you ETH yet.</h2>
+        <h4 className="text-gray-400">
+          You haven't asked anyone to give you ETH yet.
+        </h4>
       </div>
     );
   }

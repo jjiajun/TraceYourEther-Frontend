@@ -13,9 +13,6 @@ export default function LoginBox({ user }) {
   // State and setter for signup and login message
   const [message, setMessage] = useState("");
 
-
-
-
   const loginAttempt = () => {
     const data = {
       email: email,
@@ -42,20 +39,18 @@ export default function LoginBox({ user }) {
     });
   };
 
-
-
-
-
   return (
-    <div className="flex grow flex-col justify-around">
-      <div >
-        <input className="text-3xl my-2"
+    <div className="flex grow flex-col justify-around py-7">
+      <div>
+        <input
+          className="text-xl my-3 px-2 w-5/6 h-10 rounded-lg"
           name="email"
           id="email"
           placeholder="Email"
           onChange={(event) => setEmail(event.target.value)}
         />
-        <input className="text-3xl my-2"
+        <input
+          className="text-xl my-3 px-2 h-10 w-5/6 rounded-lg"
           name="password"
           id="password"
           type="password"
@@ -65,14 +60,14 @@ export default function LoginBox({ user }) {
       </div>
       <div className="justify-self-end my-2">
         <button
-          className="btn text-3xl"
+          className="btn text-xl px-4 py-2"
           type="submit"
           onClick={loginAttempt}
         >
           Login{" "}
         </button>
       </div>
-      {message !== '' && <Message displayMessage={message} />}
+      {message !== "" && <Message displayMessage={message} />}
     </div>
-  )
+  );
 }

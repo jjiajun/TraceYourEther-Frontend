@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Message from "./Message";
 const { REACT_APP_BACKEND } = process.env;
 
@@ -11,7 +11,6 @@ export default function SignupBox() {
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-
 
   const signUpAttempt = () => {
     //data to send to backend
@@ -36,46 +35,50 @@ export default function SignupBox() {
     });
   };
 
-  return(
-    <div className="flex grow flex-col justify-around">
-          <div >
-            <input className="text-3xl my-2"
-              name="email"
-              id="email"
-              placeholder="Email"
-              onChange={(event) => setEmail(event.target.value)}
-            />
-            <input className="text-3xl my-2"
-              name="password"
-              id="password"
-              type="password"
-              placeholder="Password"
-              onChange={(event) => setPassword(event.target.value)}
-            />
-            <input className="text-3xl my-2"
-              name="name"
-              id="name"
-              placeholder="Name"
-              onChange={(event) => setName(event.target.value)}
-            />
-            <input className="text-3xl my-2"
-              name="address"
-              id="address"
-              placeholder="Address"
-              onChange={(event) => setAddress(event.target.value)}
-            />
-          </div>
-          <div className="justify-self-end my-2">
-            <button
-              className="btn text-3xl"
-              type="submit"
-              onClick={signUpAttempt}
-            >
-              Sign Up{" "}
-            </button>
-          </div>
+  return (
+    <div className="flex grow flex-col justify-around py-4">
+      <div>
+        <input
+          className="text-xl mb-1 px-2 w-5/6 h-10 rounded-lg"
+          name="email"
+          id="email"
+          placeholder="Email"
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <input
+          className="text-xl my-1 px-2 w-5/6 h-10 rounded-lg"
+          name="password"
+          id="password"
+          type="password"
+          placeholder="Password"
+          onChange={(event) => setPassword(event.target.value)}
+        />
+        <input
+          className="text-xl my-1 px-2 w-5/6 h-10 rounded-lg"
+          name="name"
+          id="name"
+          placeholder="Name"
+          onChange={(event) => setName(event.target.value)}
+        />
+        <input
+          className="text-xl my-1 px-2 w-5/6 h-10 rounded-lg"
+          name="address"
+          id="address"
+          placeholder="Address"
+          onChange={(event) => setAddress(event.target.value)}
+        />
+      </div>
+      <div className="justify-self-end my-1">
+        <button
+          className="btn text-xl px-4 py-2"
+          type="submit"
+          onClick={signUpAttempt}
+        >
+          Sign Up{" "}
+        </button>
+      </div>
 
-          <Message displayMessage={message} />
-        </div>
-  ) 
+      <Message displayMessage={message} />
+    </div>
+  );
 }

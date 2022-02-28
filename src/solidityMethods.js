@@ -95,7 +95,7 @@ export async function getAllRequestsForPayer() {
     const arrayOfRequestObjs = [];
     // loop through array to return array of requestObjs
     for (let i = 0; i < allPayerRequests.length; i += 1) {
-      const request = await getRequestDetails(i);
+      const request = await getRequestDetails(allPayerRequests[i]);
       // convert timestamp to UTCString()
       const timestamp = request.timestamp;
       const newDate = new Date();
@@ -142,14 +142,14 @@ export async function getAllRequestsForPayee() {
       Main.abi,
       provider
     );
-    // get array of payer requests
+    // get array of payee requests
     const allPayeeRequests = await contract.getAllPayeeRequests(userAddress);
     console.log("allPayeeRequests", allPayeeRequests);
     // initialize new array to store requestObjs
     const arrayOfRequestObjs = [];
     // loop through array to return array of requestObjs
     for (let i = 0; i < allPayeeRequests.length; i += 1) {
-      const request = await getRequestDetails(i);
+      const request = await getRequestDetails(allPayeeRequests[i]);
       // convert timestamp to UTCString()
       const timestamp = request.timestamp;
       const newDate = new Date();

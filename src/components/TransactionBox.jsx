@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { userContext } from "../context";
 
 const { REACT_APP_BACKEND } = process.env;
 
@@ -7,6 +8,7 @@ export default function TransactionBox(transactions) {
   const [idToName, setIdToName] = useState(null);
   const [payeeName, setPayeeName] = useState("");
   const [payerName, setPayerName] = useState("");
+  const [profileData, setProfileData] = useState();
   useEffect(() => {
     axios.get(`${REACT_APP_BACKEND}/getallusersdata`).then((response) => {
       console.log(response.data.allUserData);
@@ -19,12 +21,22 @@ export default function TransactionBox(transactions) {
     });
   }, []);
 
+  const id = useContext(userContext);
+  useEffect(() => {
+    axios
+      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
+      .then((response) => {
+        setProfileData(response.data.userProfile.address);
+        console.log(profileData);
+      });
+  }, []);
+
   console.log("trans", transactions);
   if (!transactions.transactions) return <div />;
   if (!transactions.transactions[0]) {
     return (
       <div>
-        <h2>No transactions currently</h2>
+        <h4 className="text-gray-400">No transactions currently</h4>
       </div>
     );
   }
@@ -40,7 +52,11 @@ export default function TransactionBox(transactions) {
         </td>
         <td className="name-cell">{transaction.timestamp}</td>
         <td className="name-cell">{transaction.description}</td>
-        <td className="name-cell rounded-r-3xl">{transaction.amount}</td>
+        <td className="name-cell rounded-r-3xl">
+          {transaction.payerAddress === profileData
+            ? `-${transaction.amount}`
+            : `+${transaction.amount}`}
+        </td>
       </tr>
     )
   );

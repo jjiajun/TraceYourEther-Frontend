@@ -42,6 +42,7 @@ export default function Requests() {
       setInRequestList(existingReq);
     });
     getAllRequestsForPayee().then((response) => {
+      console.log("ALL REQUESTS FOR PAYEE: ", response);
       const existingReq = response.filter(
         (request) => request.completed === false
       );

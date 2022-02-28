@@ -9,7 +9,7 @@ export default function OutRequest({ oneRequest }) {
   useEffect(() => {
     axios
       .post(`${REACT_APP_BACKEND}/getuserprofilebywallet`, {
-        address: oneRequest.payeeAddress.toString(),
+        address: oneRequest.payerAddress.toString(),
       })
       .then((response) => {
         setRequester(response.data.userProfile.name);

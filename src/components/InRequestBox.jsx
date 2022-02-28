@@ -22,5 +22,5 @@ export default function InRequestBox({ requests, setInRequest }) {
     />
   ));
 
-  return <div className="grow flex justify-center bg-white">{requestList}</div>;
+  return <div className="grow flex justify-center">{requestList}</div>;
 }
