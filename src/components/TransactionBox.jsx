@@ -1,63 +1,64 @@
 import axios from "axios";
-import React,{useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-
-const {REACT_APP_BACKEND} = process.env
-
+const { REACT_APP_BACKEND } = process.env;
 
 export default function TransactionBox(transactions) {
-  const [idToName,setIdToName] = useState(null)
-  const [payeeName, setPayeeName] = useState('')
-  const [payerName , setPayerName]  = useState('')
-  useEffect(()=>{
-    axios.get(`${REACT_APP_BACKEND}/getallusersdata`).then((response)=>{
-      console.log(response.data.allUserData)
-      const userMapping = {}
-      response.data.allUserData.forEach((user,index)=>{
-        userMapping[`${user.address.toLowerCase()}`] = user.name
-      })
-      console.log(userMapping)
-      setIdToName(userMapping)
-     
-    })
-  },[])
-  
-  console.log('trans',transactions)
-  if(!transactions.transactions) return <div />;
-  if(!transactions.transactions[0]) {
-    return(
+  const [idToName, setIdToName] = useState(null);
+  const [payeeName, setPayeeName] = useState("");
+  const [payerName, setPayerName] = useState("");
+  useEffect(() => {
+    axios.get(`${REACT_APP_BACKEND}/getallusersdata`).then((response) => {
+      console.log(response.data.allUserData);
+      const userMapping = {};
+      response.data.allUserData.forEach((user, index) => {
+        userMapping[`${user.address.toLowerCase()}`] = user.name;
+      });
+      console.log(userMapping);
+      setIdToName(userMapping);
+    });
+  }, []);
+
+  console.log("trans", transactions);
+  if (!transactions.transactions) return <div />;
+  if (!transactions.transactions[0]) {
+    return (
       <div>
         <h2>No transactions currently</h2>
       </div>
-    )
+    );
   }
 
-  const transactionList = transactions.transactions.map((transaction,index)=>(
-    <tr>
-      <td>{idToName[transaction.payeeAddress.toLowerCase()]}</td>
-      <td>{idToName[transaction.payerAddress.toLowerCase()]}</td>
-      <td>{transaction.amount}</td>
-      <td>{transaction.timestamp}</td>
-      <td>{transaction.description}</td>
-    </tr>
-  ))
+  const transactionList = transactions.transactions.map(
+    (transaction, index) => (
+      <tr className="bg-gray-200">
+        <td className="name-cell">
+          {idToName[transaction.payeeAddress.toLowerCase()]}
+        </td>
+        <td className="name-cell">
+          {idToName[transaction.payerAddress.toLowerCase()]}
+        </td>
+        <td className="name-cell">{transaction.timestamp}</td>
+        <td className="name-cell">{transaction.description}</td>
+        <td className="name-cell">{transaction.amount}</td>
+      </tr>
+    )
+  );
 
-  return(
-    <div>
-      <table>
+  return (
+    <div className="flex justify-center">
+      <table className="table-auto">
         <thead>
           <tr>
-            <th>Requester</th>
-            <th>Payer</th>
-            <th>Amount</th>
-            <th>Date</th>
-            <th>Description</th>
+            <th className="w-32 font-semibold text-gray-400">Payee</th>
+            <th className="w-32 font-semibold text-gray-400">Payer</th>
+            <th className="w-52 font-semibold text-gray-400">Timestamp</th>
+            <th className="w-56 font-semibold text-gray-400">Description</th>
+            <th className="w-32 font-semibold text-gray-400">Amt</th>
           </tr>
         </thead>
-        <tbody>
-          {idToName && transactionList}
-        </tbody>
+        <tbody>{idToName && transactionList}</tbody>
       </table>
     </div>
-  )
+  );
 }
