@@ -1,13 +1,15 @@
 import React ,{useContext, useEffect,useState} from "react";
 import { approveRequest, rejectRequest } from "../solidityMethods";
 import axios from "axios";
-import { setRequestContext } from "../context";
-import { getAllRequestsForPayer } from "../solidityMethods";
+import { refreshContext } from "../context";
+import { useNavigate } from 'react-router-dom';
 const {REACT_APP_BACKEND} = process.env
 
 export default function InRequest({oneRequest, allRequest, setter}){
   const [requester, setRequester] = useState('');
-  const reqSetter = useContext(setRequestContext)
+  const refresh = useContext(refreshContext)
+  const navigate = useNavigate();
+  
   
   useEffect(() => {
     axios.post(`${REACT_APP_BACKEND}/getuserprofilebywallet`,{address:oneRequest.payeeAddress.toString()}).then((response)=>{
@@ -25,15 +27,7 @@ export default function InRequest({oneRequest, allRequest, setter}){
     console.log('Approve')
     console.log('req id',oneRequest.id )
     approveRequest(oneRequest.id).then((response)=>{
-      
-      setter([...allRequest].map((req)=>{
-        if(req.id === oneRequest.id){
-          console.log('found')
-          return { ...req, completed: true }
- 
-        }
-        return req
-      }))
+      setTimeout(()=>{refresh.setter(!refresh.state)},15000)
     })
     
     
@@ -42,7 +36,10 @@ export default function InRequest({oneRequest, allRequest, setter}){
   
   const rejectThisRequest =() =>{
     console.log('Reject')
-    rejectRequest(oneRequest.id)
+    rejectRequest(oneRequest.id).then((response)=>{
+      console.log('rejectedddddd')
+      setTimeout(()=>{refresh.setter(!refresh.state)},15000)
+    })
   }
 
   

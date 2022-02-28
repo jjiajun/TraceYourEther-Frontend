@@ -4,7 +4,7 @@ import InRequest from "./InRequest";
 export default function InRequestBox({requests, setInRequest}) {
   
   if(!requests) return <div />;
-  console.log(requests)
+  console.log('box',requests)
   if(!requests[0]) {
     return(
       <div>

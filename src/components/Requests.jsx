@@ -5,8 +5,10 @@ import MakeRequest from "./MakeRequest";
 import InRequestBox from "./InRequestBox";
 import OutRequestBox from "./OutRequestBox";
 import { getAllRequestsForPayer, getAllRequestsForPayee } from "../solidityMethods";
-import { setRequestContext } from "../context";
-import Trial from "./Trial";
+import { refreshContext } from "../context";
+import Trial from "./Trial"
+
+
 const {REACT_APP_BACKEND} = process.env
 
 export default function Requests() {
@@ -14,12 +16,13 @@ export default function Requests() {
   const [friendList,setFriendList] = useState();
   const [inRequestList,setInRequestList] = useState();
   const [outRequestList,setOutRequestList] = useState();
-  console.log(id)
-  const [refresh , setRefresh] = useState(true)
+  const [refresh,useRefresh] = useState(true)
   const data = {
     state : refresh,
-    setter : setRefresh
+    setter : useRefresh
   }
+
+  
 
   
   useEffect(() => {
@@ -35,18 +38,20 @@ export default function Requests() {
       setOutRequestList(existingReq)
       
     })
+    console.log('triggered')
       
-    },[inRequestList])
-    console.log(refresh)
+    },[refresh])
+    
   return (
     <div>
       <h1>Requests</h1>
-      <setRequestContext.Provider value={ data}>
-      {refresh && <Trial/>}
-      <MakeRequest friends= {friendList}/>
-      <InRequestBox requests = {inRequestList} setInRequest = {setInRequestList} />
-      <OutRequestBox requests = {outRequestList} />
-      </setRequestContext.Provider>
+      
+      <refreshContext.Provider value={data}>
+        {refresh && <Trial/>}
+        <MakeRequest friends= {friendList}/>
+        <InRequestBox requests = {inRequestList} setInRequest = {setInRequestList} />
+        <OutRequestBox requests = {outRequestList} />
+      </refreshContext.Provider>
     </div>
   )
 }

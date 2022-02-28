@@ -11,10 +11,13 @@ export default function Transactions() {
     
     getAllRequestsForPayer().then((response)=>{
       console.log('test',response)
-      const existingReqPayer = response.filter((request)=>request.completed === true)
+      const existingReqPayer = response.filter((request)=>request.completed === true && request.approved === 1)
       getAllRequestsForPayee().then((responsePayee)=>{
-      const existingReqPayee = responsePayee.filter((request)=>request.completed === true)
-      setTransactionList([...existingReqPayee,...existingReqPayer].sort((a,b)=>{return b.timestamp-a.timestamp}))
+      const existingReqPayee = responsePayee.filter((request)=>request.completed === true && request.approved === 1)
+      let holding = [...existingReqPayee,...existingReqPayer]
+      holding.sort(function (a,b){return Number(b.noOfSecSinceEpoch)-Number(a.noOfSecSinceEpoch)})
+      setTransactionList(holding)
+      console.log(transactionList)
       
     })
     })
