@@ -25,18 +25,20 @@ export default function FriendBox() {
   }
 
   return (
-    <div>
-      <input
-            name="email"
-            id="email"
-            placeholder="Email"
-            onChange={(event) => setEmail(event.target.value)}
-          />
-      <button className="btn sub-btn" type="submit" onClick={addFriendAttempt}>
-            Add Friend
-            {' '}
-          </button>
-      <Message displayMessage = {message} />
+    <div className="flex justify-center">
+      <div className="flex flex-col w-96 bg-white py-5 px-5 rounded-2xl text-gray-900">
+        <input
+              name="email"
+              id="email"
+              placeholder="Email"
+              onChange={(event) => setEmail(event.target.value)}
+            />
+        <button className="btn sub-btn" type="submit" onClick={addFriendAttempt}>
+              Add Friend
+              {' '}
+            </button>
+        <Message displayMessage = {message} />
+      </div>
     </div>
   )
 }

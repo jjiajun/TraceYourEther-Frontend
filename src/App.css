@@ -37,9 +37,7 @@
   }
 }
 
-.loginBox {
-  background-color: #61dafb;
-}
+
 
 @tailwind base;
 @tailwind components;
