@@ -8,7 +8,7 @@ import { FaUserFriends } from "react-icons/fa";
 export default function NavBar() {
   return (
     <>
-      <div className="fixed bottom-0 left-0 w-screen h-20 m-0 bg-white text-black shadow-lg px-20 flex flex-col justify-center">
+      <div className="fixed bottom-0 left-0 w-screen h-20 m-0 bg-gradient-to-t from-white to-background text-black shadow-lg px-20 flex flex-col justify-center">
         <nav className="flex justify-between ">
           <Link to="/" className="navbar-icon">
             {<BiHomeAlt size="28" />} Dashboard

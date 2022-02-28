@@ -102,7 +102,10 @@ export async function getAllRequestsForPayer() {
       newDate.setTime(Number(timestamp) * 1000);
       const dateString = `${newDate.toLocaleDateString(
         "en-SG"
-      )} ${newDate.toLocaleTimeString("en-SG")}`;
+      )} ${newDate.toLocaleTimeString("en-SG", {
+        hour: "2-digit",
+        minute: "2-digit",
+      })}`;
       //const dateString =DateTime.fromISO(newDate)
       // create requestObj for each i to push into array
       const requestObj = {
@@ -154,7 +157,10 @@ export async function getAllRequestsForPayee() {
       // const dateString = newDate.toUTCString();
       const dateString = `${newDate.toLocaleDateString(
         "en-SG"
-      )} ${newDate.toLocaleTimeString("en-SG")}`;
+      )} ${newDate.toLocaleTimeString("en-SG", {
+        hour: "2-digit",
+        minute: "2-digit",
+      })}`;
       // create requestObj for each i to push into array
       const requestObj = {
         id: allPayeeRequests[i].toNumber(),

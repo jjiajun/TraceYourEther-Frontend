@@ -47,7 +47,7 @@
 
 @layer components {
   .navbar-icon {
-    @apply relative flex flex-col items-center justify-center align-middle h-20 w-28 my-auto hover:bg-purple-300 rounded-md;
+    @apply relative flex flex-col items-center justify-center align-middle h-20 w-28 my-auto hover:text-primary rounded-md font-medium;
   }
 
   h2 {

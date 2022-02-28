@@ -35,7 +35,7 @@ export default function MakeRequest(friends) {
   };
 
   return (
-    <div className="flex flex-col w-screen py-3 px-5 bg-white rounded-t-3xl text-gray-900 items-center">
+    <div className="flex flex-col w-screen py-3 px-5 bg-gradient-to-t from-white to-background rounded-t-3xl text-gray-900 items-center">
       <div className="w-1/2 bg-white flex flex-col my-3">
         <select
           className="mb-3 h-10 bg-white border-primary border-2 rounded-lg px-2"
