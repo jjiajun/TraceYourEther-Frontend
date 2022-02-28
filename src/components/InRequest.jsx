@@ -52,27 +52,36 @@ export default function InRequest({ oneRequest, allRequest, setter }) {
 
   return (
     <div>
-      <div className="incomingReq">
-        <div className="requestDetails">
-          <h4>{requester}</h4>
-          <h5>{oneRequest.amount}</h5>
-          <p>{oneRequest.description}</p>
+      <div className="incomingReq shadow-xl shadow-background w-48 h-52 rounded-lg bg-white my-5">
+        <div className="bg-primary text-gray-100 h-10 rounded-t-lg flex align-middle justify-center">
+          <h3 className="mt-1 justify-self-center align-self-center font-semibold mb-4">
+            {requester}
+          </h3>
         </div>
-        <div>
-          <button
-            className="btn approve-btn"
-            type="submit"
-            onClick={approveThisRequest}
-          >
-            Approve
-          </button>
-          <button
-            className="btn reject-btn"
-            type="submit"
-            onClick={rejectThisRequest}
-          >
-            Reject
-          </button>
+        <div className="my-5">
+          <span className="font-bold text-3xl text-primary">
+            {oneRequest.amount}
+          </span>
+          <span className="text-base text-primary font-bold"> ETH</span>
+          <p className="my-2">{oneRequest.description}</p>
+        </div>
+        <div className="flex flex-row">
+          <div>
+            <button
+              className="btn approve-btn"
+              type="submit"
+              onClick={approveThisRequest}
+            >
+              Approve
+            </button>
+            <button
+              className="btn reject-btn"
+              type="submit"
+              onClick={rejectThisRequest}
+            >
+              Reject
+            </button>
+          </div>
         </div>
       </div>
     </div>

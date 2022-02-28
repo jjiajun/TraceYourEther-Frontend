@@ -19,7 +19,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <div className="flex h-1/6 w-screen">
+    <div className="flex h-24 w-screen">
       <div className="px-2 mx-2 my-auto">
         {<HiOutlineUserCircle size="40" />}
       </div>

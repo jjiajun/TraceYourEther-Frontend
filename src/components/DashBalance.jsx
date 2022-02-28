@@ -26,17 +26,17 @@ export default function DashBalance() {
   }, []);
 
   return (
-    <div className="flex flex-col w-screen py-5 px-5">
+    <div className="flex flex-col w-screen py-3 px-5">
       <div className="my-2">
         <h5>Available Balance</h5>
         <h2 className="text-3xl text-secondary">
           {Math.round(balance * 1000) / 1000} ether
         </h2>
       </div>
-      <div className="my2">
+      {/* <div className="my2">
         <h5 className="text-base text-gray-300">Wallet Address</h5>
         <h3>{wallet}</h3>
-      </div>
+      </div> */}
     </div>
   );
 }
