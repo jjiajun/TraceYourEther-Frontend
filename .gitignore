@@ -23,4 +23,10 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
+<<<<<<< HEAD
 /src/artifacts
+=======
+
+/src/artifacts
+/cache
+>>>>>>> dom

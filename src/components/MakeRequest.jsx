@@ -1,15 +1,29 @@
 import axios from "axios";
+<<<<<<< HEAD
 import React, { useState, useContext } from "react";
 import { userContext } from "../context";
 import Message from "./Message";
+=======
+import React, {useState,useContext} from "react";
+import { refreshContext, userContext } from "../context";
+import Message from "./Message"
+>>>>>>> dom
 import { createRequest } from "../solidityMethods";
 const { REACT_APP_BACKEND } = process.env;
 
 export default function MakeRequest(friends) {
+<<<<<<< HEAD
   console.log(friends);
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [friendWallet, setFriendWallet] = useState("");
+=======
+  console.log(friends)
+  const [amount,setAmount] = useState('');
+  const [description , setDescription] = useState('');
+  const [friendWallet, setFriendWallet] = useState('');
+  const refresh = useContext(refreshContext)
+>>>>>>> dom
 
   if (!friends.friends) return <div />;
   if (!friends.friends[0]) {
@@ -24,17 +38,30 @@ export default function MakeRequest(friends) {
   ));
   console.log("fri", friendOptions);
 
+<<<<<<< HEAD
   const requestAttempt = () => {
     console.log("makereq", amount, description, friendWallet);
     createRequest(friendWallet, amount, description);
   };
+=======
+    const requestAttempt = () => {
+      console.log('makereq',amount,description,friendWallet)
+      createRequest(friendWallet,amount,description).then((response)=>{
+      setTimeout(()=>{refresh.setter(!refresh.state)},15000)
+    })
+    }
+>>>>>>> dom
 
   return (
     <div>
+<<<<<<< HEAD
       <select
         id="friends"
         onChange={(event) => setFriendWallet(event.target.value)}
       >
+=======
+      <select id='friends' onChange={(event) => setFriendWallet(event.target.value)}>
+>>>>>>> dom
         <option>Choose friend</option>
         {friendOptions}
       </select>

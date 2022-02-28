@@ -1,51 +1,107 @@
-import React ,{useEffect,useState} from "react";
-import { approveRequest } from "../solidityMethods";
+import React, { useContext, useEffect, useState } from "react";
+import { approveRequest, rejectRequest } from "../solidityMethods";
 import axios from "axios";
+<<<<<<< HEAD
+import { setRequestContext } from "../context";
+import { getAllRequestsForPayer } from "../solidityMethods";
+const { REACT_APP_BACKEND } = process.env;
+
+export default function InRequest({ oneRequest, allRequest, setter }) {
+  const [requester, setRequester] = useState("");
+  const reqSetter = useContext(setRequestContext);
+=======
+import { refreshContext } from "../context";
+import { useNavigate } from 'react-router-dom';
 const {REACT_APP_BACKEND} = process.env
 
-export default function InRequest(oneRequest){
+export default function InRequest({oneRequest, allRequest, setter}){
   const [requester, setRequester] = useState('');
-
- 
+  const refresh = useContext(refreshContext)
+  const navigate = useNavigate();
+  
+  
   useEffect(() => {
-    axios.post(`${REACT_APP_BACKEND}/getuserprofilebywallet`,{address:oneRequest.oneRequest.payeeAddress.toString()}).then((response)=>{
+    axios.post(`${REACT_APP_BACKEND}/getuserprofilebywallet`,{address:oneRequest.payeeAddress.toString()}).then((response)=>{
       setRequester(response.data.userProfile.name)
     })
       
     },[]) 
+>>>>>>> 097dd584b4789a8d764be1b73d5ac88f138e8c87
 
-  if(!oneRequest.oneRequest) return <div />;
-  console.log('one',oneRequest)
+  useEffect(() => {
+    axios
+      .post(`${REACT_APP_BACKEND}/getuserprofilebywallet`, {
+        address: oneRequest.payeeAddress.toString(),
+      })
+      .then((response) => {
+        setRequester(response.data.userProfile.name);
+      });
+  }, []);
+
+<<<<<<< HEAD
+  if (!oneRequest) return <div />;
+  console.log("one", oneRequest);
+  console.log("all", allRequest);
+  console.log("setter", setter);
+
+  const approveThisRequest = () => {
+    console.log("Approve");
+    console.log("req id", oneRequest.id);
+    approveRequest(oneRequest.id).then((response) => {
+      setRefresh(!refresh);
+    });
+  };
+=======
   const approveThisRequest =() =>{
     console.log('Approve')
-    console.log('req id',oneRequest.oneRequest.id )
-    approveRequest(oneRequest.oneRequest.id)
+    console.log('req id',oneRequest.id )
+    approveRequest(oneRequest.id).then((response)=>{
+      setTimeout(()=>{refresh.setter(!refresh.state)},15000)
+    })
+    
+    
 
   }
   
   const rejectThisRequest =() =>{
     console.log('Reject')
+    rejectRequest(oneRequest.id).then((response)=>{
+      console.log('rejectedddddd')
+      setTimeout(()=>{refresh.setter(!refresh.state)},15000)
+    })
   }
+>>>>>>> 097dd584b4789a8d764be1b73d5ac88f138e8c87
 
-  
+  const rejectThisRequest = () => {
+    console.log("Reject");
+    rejectRequest(oneRequest.id);
+  };
 
   return (
     <div>
       <div className="incomingReq">
         <div className="requestDetails">
           <h4>{requester}</h4>
-          <h5>{oneRequest.oneRequest.amount}</h5>
-          <p>{oneRequest.oneRequest.description}</p>
+          <h5>{oneRequest.amount}</h5>
+          <p>{oneRequest.description}</p>
         </div>
         <div>
-          <button className="btn approve-btn" type="submit" onClick={approveThisRequest} >
+          <button
+            className="btn approve-btn"
+            type="submit"
+            onClick={approveThisRequest}
+          >
             Approve
           </button>
-          <button className="btn reject-btn" type="submit" onClick={rejectThisRequest} >
+          <button
+            className="btn reject-btn"
+            type="submit"
+            onClick={rejectThisRequest}
+          >
             Reject
           </button>
         </div>
       </div>
     </div>
-  )
+  );
 }

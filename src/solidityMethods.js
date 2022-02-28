@@ -1,6 +1,12 @@
 import { ethers } from "ethers";
+<<<<<<< HEAD
 import Main from "./artifacts/contracts/main.sol/Main.json"; // need to update this whenever you deploy the contract
 const mainContractAddress = "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512";
+=======
+import Main from "./artifacts/contracts/Main.sol/Main.json"; // need to update this whenever you deploy the contract
+import { DateTime } from "luxon";
+const mainContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+>>>>>>> dom
 
 /** Request access to wallet - this is needed for transactions that happen on the blockchain */
 export async function requestAccount() {
@@ -96,10 +102,18 @@ export async function getAllRequestsForPayer() {
     for (let i = 0; i < allPayerRequests.length; i += 1) {
       const request = await getRequestDetails(i);
       // convert timestamp to UTCString()
+<<<<<<< HEAD
       const timestamp = request.timestamp;
       const newDate = new Date();
       newDate.setTime(timestamp * 1000);
       const dateString = newDate.toUTCString();
+=======
+      const timestamp = request.timestamp ;
+      const newDate = new Date();
+      newDate.setTime((Number(timestamp)) * 1000);
+      const dateString = `${newDate.toLocaleDateString('en-SG')} ${newDate.toLocaleTimeString('en-SG')}`;
+      //const dateString =DateTime.fromISO(newDate)
+>>>>>>> dom
       // create requestObj for each i to push into array
       const requestObj = {
         id: allPayerRequests[i].toNumber(),
@@ -146,7 +160,12 @@ export async function getAllRequestsForPayee() {
       const timestamp = request.timestamp;
       const newDate = new Date();
       newDate.setTime(timestamp * 1000);
+<<<<<<< HEAD
       const dateString = newDate.toUTCString();
+=======
+      // const dateString = newDate.toUTCString();
+      const dateString = `${newDate.toLocaleDateString('en-SG')} ${newDate.toLocaleTimeString('en-SG')}`;
+>>>>>>> dom
       // create requestObj for each i to push into array
       const requestObj = {
         id: allPayeeRequests[i].toNumber(),
