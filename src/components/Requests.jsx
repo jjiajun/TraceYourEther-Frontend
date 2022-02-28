@@ -28,6 +28,7 @@ export default function Requests() {
     axios
       .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
       .then((response) => {
+        console.log("RESP: ", response);
         setFriendList(response.data.userProfile.friends);
         console.log(friendList);
       });

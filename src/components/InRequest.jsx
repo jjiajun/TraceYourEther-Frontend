@@ -1,32 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { approveRequest, rejectRequest } from "../solidityMethods";
 import axios from "axios";
-<<<<<<< HEAD
-import { setRequestContext } from "../context";
-import { getAllRequestsForPayer } from "../solidityMethods";
+import { refreshContext } from "../context";
+import { useNavigate } from "react-router-dom";
 const { REACT_APP_BACKEND } = process.env;
 
 export default function InRequest({ oneRequest, allRequest, setter }) {
   const [requester, setRequester] = useState("");
-  const reqSetter = useContext(setRequestContext);
-=======
-import { refreshContext } from "../context";
-import { useNavigate } from 'react-router-dom';
-const {REACT_APP_BACKEND} = process.env
-
-export default function InRequest({oneRequest, allRequest, setter}){
-  const [requester, setRequester] = useState('');
-  const refresh = useContext(refreshContext)
+  const refresh = useContext(refreshContext);
   const navigate = useNavigate();
-  
-  
-  useEffect(() => {
-    axios.post(`${REACT_APP_BACKEND}/getuserprofilebywallet`,{address:oneRequest.payeeAddress.toString()}).then((response)=>{
-      setRequester(response.data.userProfile.name)
-    })
-      
-    },[]) 
->>>>>>> 097dd584b4789a8d764be1b73d5ac88f138e8c87
 
   useEffect(() => {
     axios
@@ -38,43 +20,34 @@ export default function InRequest({oneRequest, allRequest, setter}){
       });
   }, []);
 
-<<<<<<< HEAD
-  if (!oneRequest) return <div />;
-  console.log("one", oneRequest);
-  console.log("all", allRequest);
-  console.log("setter", setter);
+  useEffect(() => {
+    axios
+      .post(`${REACT_APP_BACKEND}/getuserprofilebywallet`, {
+        address: oneRequest.payeeAddress.toString(),
+      })
+      .then((response) => {
+        setRequester(response.data.userProfile.name);
+      });
+  }, []);
 
   const approveThisRequest = () => {
     console.log("Approve");
     console.log("req id", oneRequest.id);
     approveRequest(oneRequest.id).then((response) => {
-      setRefresh(!refresh);
+      setTimeout(() => {
+        refresh.setter(!refresh.state);
+      }, 15000);
     });
   };
-=======
-  const approveThisRequest =() =>{
-    console.log('Approve')
-    console.log('req id',oneRequest.id )
-    approveRequest(oneRequest.id).then((response)=>{
-      setTimeout(()=>{refresh.setter(!refresh.state)},15000)
-    })
-    
-    
-
-  }
-  
-  const rejectThisRequest =() =>{
-    console.log('Reject')
-    rejectRequest(oneRequest.id).then((response)=>{
-      console.log('rejectedddddd')
-      setTimeout(()=>{refresh.setter(!refresh.state)},15000)
-    })
-  }
->>>>>>> 097dd584b4789a8d764be1b73d5ac88f138e8c87
 
   const rejectThisRequest = () => {
     console.log("Reject");
-    rejectRequest(oneRequest.id);
+    rejectRequest(oneRequest.id).then((response) => {
+      console.log("rejectedddddd");
+      setTimeout(() => {
+        refresh.setter(!refresh.state);
+      }, 15000);
+    });
   };
 
   return (

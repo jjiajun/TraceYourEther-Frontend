@@ -40,12 +40,13 @@ export async function createRequest(address, amount, description) {
     const contract = new ethers.Contract(mainContractAddress, Main.abi, signer);
     console.log("CONTRACT: ", contract);
     // call createRequest method from main.sol
+    console.log("address: ", address);
     await contract.createRequest(address.toLowerCase(), amount, description);
     console.log("CONTRACT: ", contract);
     console.log(`request created (${address}, ${amount}, ${description})`);
   }
 }
-
+// 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
 /** Returns promise with request details
  * Keys: payeeAddress, amount, description, approved, completed
  */
@@ -96,10 +97,12 @@ export async function getAllRequestsForPayer() {
     for (let i = 0; i < allPayerRequests.length; i += 1) {
       const request = await getRequestDetails(i);
       // convert timestamp to UTCString()
-      const timestamp = request.timestamp ;
+      const timestamp = request.timestamp;
       const newDate = new Date();
-      newDate.setTime((Number(timestamp)) * 1000);
-      const dateString = `${newDate.toLocaleDateString('en-SG')} ${newDate.toLocaleTimeString('en-SG')}`;
+      newDate.setTime(Number(timestamp) * 1000);
+      const dateString = `${newDate.toLocaleDateString(
+        "en-SG"
+      )} ${newDate.toLocaleTimeString("en-SG")}`;
       //const dateString =DateTime.fromISO(newDate)
       // create requestObj for each i to push into array
       const requestObj = {
@@ -149,7 +152,9 @@ export async function getAllRequestsForPayee() {
       const newDate = new Date();
       newDate.setTime(timestamp * 1000);
       // const dateString = newDate.toUTCString();
-      const dateString = `${newDate.toLocaleDateString('en-SG')} ${newDate.toLocaleTimeString('en-SG')}`;
+      const dateString = `${newDate.toLocaleDateString(
+        "en-SG"
+      )} ${newDate.toLocaleTimeString("en-SG")}`;
       // create requestObj for each i to push into array
       const requestObj = {
         id: allPayeeRequests[i].toNumber(),
