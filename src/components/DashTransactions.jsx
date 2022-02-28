@@ -34,8 +34,8 @@ export default function DashTransactions() {
     });
   }, [refresh.state]);
   return (
-    <div className="flex flex-col  w-screen bg-gradient-to-b from-white to-background py-3 px-5 text-gray-900">
-      <h3 className="font-bold">Latest Transactions</h3>
+    <div className="flex flex-col w-screen bg-white py-3 px-5 text-gray-900 flex-grow overflow-auto mb-20">
+      <h3 className="font-bold mb-3">Latest Transactions</h3>
       <TransactionBox transactions={transactionList} />
     </div>
   );

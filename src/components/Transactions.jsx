@@ -5,6 +5,8 @@ import {
   getAllRequestsForPayee,
   getAllRequestsForPayer,
 } from "../solidityMethods";
+import DashBalance from "./DashBalance";
+import Profile from "./Profile";
 
 const { REACT_APP_BACKEND } = process.env;
 
@@ -30,9 +32,12 @@ export default function Transactions() {
     });
   }, []);
   return (
-    <div>
-      <h1>Transactions</h1>
-      <TransactionBox transactions={transactionList} />
+    <div className="bg-primary text-white">
+      <Profile />
+      <DashBalance />
+      <div className="bg-white text-gray-900 py-8 rounded-t-3xl ">
+        <TransactionBox transactions={transactionList} />
+      </div>
     </div>
   );
 }

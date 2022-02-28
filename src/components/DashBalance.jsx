@@ -26,12 +26,13 @@ export default function DashBalance() {
   }, []);
 
   return (
-    <div className="flex flex-col w-screen py-3 px-5">
-      <div className="my-2">
-        <h5>Available Balance</h5>
-        <h2 className="text-3xl text-secondary">
-          {Math.round(balance * 1000) / 1000} ether
-        </h2>
+    <div className="flex flex-col w-screen pb-3 px-5">
+      <div className="mb-4">
+        <h5 className="mb-2">Available Balance</h5>
+        <span className="text-4xl text-secondary font-semibold">
+          {Math.round(balance * 10000) / 10000}
+        </span>
+        <span className="text-3xl text-secondary font-bold"> ETH</span>
       </div>
       {/* <div className="my2">
         <h5 className="text-base text-gray-300">Wallet Address</h5>

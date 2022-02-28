@@ -31,8 +31,8 @@ export default function TransactionBox(transactions) {
 
   const transactionList = transactions.transactions.map(
     (transaction, index) => (
-      <tr className="bg-gray-200">
-        <td className="name-cell">
+      <tr className="bg-background h-12 border-white border-8 ">
+        <td className="name-cell rounded-l-3xl">
           {idToName[transaction.payeeAddress.toLowerCase()]}
         </td>
         <td className="name-cell">
@@ -40,21 +40,21 @@ export default function TransactionBox(transactions) {
         </td>
         <td className="name-cell">{transaction.timestamp}</td>
         <td className="name-cell">{transaction.description}</td>
-        <td className="name-cell">{transaction.amount}</td>
+        <td className="name-cell rounded-r-3xl">{transaction.amount}</td>
       </tr>
     )
   );
 
   return (
-    <div className="flex justify-center">
-      <table className="table-auto">
+    <div className="flex justify-center my-2 bg-white text-gray-900 w-full px-10">
+      <table className="table-auto w-full">
         <thead>
           <tr>
-            <th className="w-32 font-semibold text-gray-400">Payee</th>
-            <th className="w-32 font-semibold text-gray-400">Payer</th>
-            <th className="w-52 font-semibold text-gray-400">Timestamp</th>
-            <th className="w-56 font-semibold text-gray-400">Description</th>
-            <th className="w-32 font-semibold text-gray-400">Amt</th>
+            <th className="w-1/8 font-semibold text-gray-400">Payee</th>
+            <th className="w-1/8 font-semibold text-gray-400">Payer</th>
+            <th className="w-1/4 font-semibold text-gray-400">Timestamp</th>
+            <th className="w-1/4 font-semibold text-gray-400">Description</th>
+            <th className="w-1/4 font-semibold text-gray-400">Amt</th>
           </tr>
         </thead>
         <tbody>{idToName && transactionList}</tbody>

@@ -44,3 +44,6 @@ How to get all past events:
 // }
 
 h5: text=gray, text size=base
+
+To deploy:
+npx hardhat run scripts/deploy.js --network localhost

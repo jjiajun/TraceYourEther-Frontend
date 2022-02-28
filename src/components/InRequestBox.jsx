@@ -7,7 +7,9 @@ export default function InRequestBox({ requests, setInRequest }) {
   if (!requests[0]) {
     return (
       <div className="grow align-middle content-center">
-        <h2>No pending incoming requests currently</h2>
+        <h4 className="text-gray-400">
+          None. Phew, you can keep the precious ETH to yourself.
+        </h4>
       </div>
     );
   }
@@ -20,5 +22,5 @@ export default function InRequestBox({ requests, setInRequest }) {
     />
   ));
 
-  return <div className="grow flex justify-center">{requestList}</div>;
+  return <div className="grow flex justify-center bg-white">{requestList}</div>;
 }

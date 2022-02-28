@@ -30,7 +30,7 @@ export default function Dashboard() {
   //   },[])
 
   return (
-    <div className="flex-grow bg-primary text-white">
+    <div className="flex flex-col h-screen bg-primary text-white">
       <Profile />
       {/* <h1>Dashboard</h1>
       <h2>{`${id}`}</h2> */}

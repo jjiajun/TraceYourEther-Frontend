@@ -27,8 +27,8 @@ export default function DashRequests() {
     });
   }, [refresh.state]);
   return (
-    <div className="flex flex-col w-screen bg-white py-5 px-5 rounded-t-3xl text-gray-900">
-      <h1>Request List</h1>
+    <div className="flex flex-col w-screen bg-gradient-to-t from-white to-background py-5 px-5 rounded-t-3xl text-gray-900">
+      <h3 className="font-bold mb-5">Request List</h3>
 
       <InRequestBox requests={requestList} />
     </div>

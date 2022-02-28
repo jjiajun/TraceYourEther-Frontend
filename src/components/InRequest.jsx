@@ -52,7 +52,7 @@ export default function InRequest({ oneRequest, allRequest, setter }) {
 
   return (
     <div>
-      <div className="incomingReq shadow-xl shadow-background w-48 h-52 rounded-lg bg-white my-5">
+      <div className="incomingReq shadow-xl shadow-background w-48 h-52 rounded-lg bg-white my-5 mx-4">
         <div className="bg-primary text-gray-100 h-10 rounded-t-lg flex align-middle justify-center">
           <h3 className="mt-1 justify-self-center align-self-center font-semibold mb-4">
             {requester}

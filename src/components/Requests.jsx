@@ -4,11 +4,14 @@ import axios from "axios";
 import MakeRequest from "./MakeRequest";
 import InRequestBox from "./InRequestBox";
 import OutRequestBox from "./OutRequestBox";
+import DashBalance from "./DashBalance";
+import Profile from "./Profile";
 import {
   getAllRequestsForPayer,
   getAllRequestsForPayee,
 } from "../solidityMethods";
 import { refreshContext } from "../context";
+import Divider from "./Divider";
 import Trial from "./Trial";
 
 const { REACT_APP_BACKEND } = process.env;
@@ -48,17 +51,20 @@ export default function Requests() {
   }, [refresh]);
 
   return (
-    <div>
-      <h1>Requests</h1>
-
+    <div className="bg-primary text-white">
+      <Profile />
+      <DashBalance />
       <refreshContext.Provider value={data}>
-        {refresh && <Trial />}
         <MakeRequest friends={friendList} />
-        <InRequestBox
-          requests={inRequestList}
-          setInRequest={setInRequestList}
-        />
-        <OutRequestBox requests={outRequestList} />
+        <div className="bg-white text-gray-900 overflow-y-auto pb-20">
+          <Divider msg={"Incoming Requests"} />
+          <InRequestBox
+            requests={inRequestList}
+            setInRequest={setInRequestList}
+          />
+          <Divider msg={"Outgoing Requests"} />
+          <OutRequestBox requests={outRequestList} />
+        </div>
       </refreshContext.Provider>
     </div>
   );
