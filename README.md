@@ -24,31 +24,39 @@ Authentication
 
 # Basics
 
-### What is waffle?
+What is waffle?
 
-It is a library for writing and testing smart contracts.
+- It is a library for writing and testing smart contracts.
 
-### What is chai?
+What is chai?
 
-Chai is an assertion library. It makes testing much easier by giving you lots of assertions you can run against your code.
+- Chai is an assertion library. It makes testing much easier by giving you lots of assertions you can run against your code.
 
-### Hardhat Introduction.
+Hardhat Introduction.
 
-Every time you're running Hardhat from the CLI, you are running a task. E.g. "npx hardhat compile" is running the "compile" task.
+- Every time you're running Hardhat from the CLI, you are running a task. E.g. "npx hardhat compile" is running the "compile" task.
 
-### What is Mocha
+What is Mocha
 
-Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser
+- Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser
 
-# Debugging Errors In HardHat
+# How to handle solidity errors
 
-## Nonce too high error:
+Nonce too high error:
 
 - Solve it by going to MetaMask > Settings > Advanced > Reset
 
+If requests are not showing:
+
+- Check that you are using the correct metamask wallet
+
+If metamask wallet address is causing an error:
+
+- Highly likley it is because the address is checksummed while the address you are comparing it to is not
+
 # Unutilized code
 
-## How to get all past events:
+How to get all past events:
 
 ```
 let eventFilter = contract.filters.EventName();
@@ -62,7 +70,9 @@ console.log(e.args.description);
 # To get this app to work:
 
 1. Seed the data first --> in cryptopay-backend: npm run seed
+
 2. Start the backend server --> in cryptopay-backend: npm run devStart
+
 3. Deploy the local hardhat network
 
 - npx hardhat node (to get 20 test hardhat accounts)
