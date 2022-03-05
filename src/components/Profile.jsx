@@ -9,14 +9,12 @@ const { REACT_APP_BACKEND } = process.env;
 export default function Profile() {
   const id = useContext(userContext);
   const [profileData, setProfileData] = useState();
-  console.log(id);
 
   useEffect(() => {
     axios
       .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
       .then((response) => {
         setProfileData(response.data.userProfile.name);
-        console.log(profileData);
       });
   }, []);
 

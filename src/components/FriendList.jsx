@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function FriendList({ friends }) {
-  console.log(friends);
+  
   const listOfFriends = friends.map((friend, index) => (
     <div>
       <div className="shadow-xl shadow-background w-96 h-36 rounded-lg bg-white my-5 mx-5">

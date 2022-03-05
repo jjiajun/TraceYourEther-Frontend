@@ -2,13 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { approveRequest, rejectRequest } from "../solidityMethods";
 import axios from "axios";
 import { refreshContext } from "../context";
-import { useNavigate } from "react-router-dom";
 const { REACT_APP_BACKEND } = process.env;
 
 export default function InRequest({ oneRequest, allRequest, setter }) {
   const [requester, setRequester] = useState("");
   const refresh = useContext(refreshContext);
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     axios
@@ -31,8 +30,6 @@ export default function InRequest({ oneRequest, allRequest, setter }) {
   }, []);
 
   const approveThisRequest = () => {
-    console.log("Approve");
-    console.log("req id", oneRequest.id);
     approveRequest(oneRequest.id).then((response) => {
       setTimeout(() => {
         refresh.setter(!refresh.state);
@@ -41,9 +38,7 @@ export default function InRequest({ oneRequest, allRequest, setter }) {
   };
 
   const rejectThisRequest = () => {
-    console.log("Reject");
     rejectRequest(oneRequest.id).then((response) => {
-      console.log("rejectedddddd");
       setTimeout(() => {
         refresh.setter(!refresh.state);
       }, 15000);
