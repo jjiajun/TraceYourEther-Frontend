@@ -10,7 +10,7 @@ const { REACT_APP_BACKEND } = process.env;
 export default function AddFriend() {
   const id = useContext(userContext);
   const [profileData, setProfileData] = useState();
-  console.log(id);
+  
 
   useEffect(() => {
     axios
@@ -22,7 +22,7 @@ export default function AddFriend() {
       });
   }, []);
 
-  console.log(profileData);
+  
   return (
     <div className="bg-primary text-white">
       <Profile />

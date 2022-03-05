@@ -3,7 +3,6 @@ import InRequest from "./InRequest";
 
 export default function InRequestBox({ requests, setInRequest }) {
   if (!requests) return <div />;
-  console.log(requests);
   if (!requests[0]) {
     return (
       <div className="grow align-middle content-center">
