@@ -21,7 +21,6 @@ export default function FriendBox() {
         if (response.data === "No data") {
           setMessage("No such user found.Try again");
         } else {
-          console.log(response);
           const { name, email } = response.data.friendProfile;
           setMessage(`User ${name} with E-mail ${email} added as friend`);
         }

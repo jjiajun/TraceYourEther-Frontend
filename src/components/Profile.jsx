@@ -21,7 +21,6 @@ export default function Profile() {
       .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id }, auth)
       .then((response) => {
         setProfileData(response.data.userProfile.name);
-        console.log(profileData);
       });
   }, []);
 

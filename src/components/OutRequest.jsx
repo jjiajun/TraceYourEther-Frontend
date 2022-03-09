@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { approveRequest } from "../solidityMethods";
 import axios from "axios";
 const { REACT_APP_BACKEND } = process.env;
 
