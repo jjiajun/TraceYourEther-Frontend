@@ -10,10 +10,15 @@ export default function Profile() {
   const id = useContext(userContext);
   const [profileData, setProfileData] = useState();
   console.log(id);
+  // get token from localStorage
+  const token = localStorage.getItem("sessionToken");
+  // create authorization header
+  const auth = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
     axios
-      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
+      // add auth beside id
+      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id }, auth)
       .then((response) => {
         setProfileData(response.data.userProfile.name);
         console.log(profileData);
@@ -23,6 +28,7 @@ export default function Profile() {
   const navigate = useNavigate();
 
   const goToMainPage = () => {
+    localStorage.removeItem("sessionToken");
     navigate("/main");
   };
 

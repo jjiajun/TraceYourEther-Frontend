@@ -8,12 +8,15 @@ export default function FriendBox() {
   const id = useContext(userContext);
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const token = localStorage.getItem("sessionToken");
+  // create authorization header
+  const auth = { headers: { Authorization: `Bearer ${token}` } };
 
   const addFriendAttempt = () => {
     const data = { email: email, id: id };
 
     axios
-      .post(`${REACT_APP_BACKEND}/addfriendbyemail`, data)
+      .post(`${REACT_APP_BACKEND}/addfriendbyemail`, data, auth)
       .then((response) => {
         if (response.data === "No data") {
           setMessage("No such user found.Try again");

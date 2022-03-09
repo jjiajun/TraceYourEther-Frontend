@@ -9,8 +9,13 @@ export default function TransactionBox(transactions) {
   const [payeeName, setPayeeName] = useState("");
   const [payerName, setPayerName] = useState("");
   const [profileData, setProfileData] = useState();
+
+  const token = localStorage.getItem("sessionToken");
+  // create authorization header
+  const auth = { headers: { Authorization: `Bearer ${token}` } };
+
   useEffect(() => {
-    axios.get(`${REACT_APP_BACKEND}/getallusersdata`).then((response) => {
+    axios.get(`${REACT_APP_BACKEND}/getallusersdata`, auth).then((response) => {
       console.log(response.data.allUserData);
       const userMapping = {};
       response.data.allUserData.forEach((user, index) => {
@@ -24,7 +29,7 @@ export default function TransactionBox(transactions) {
   const id = useContext(userContext);
   useEffect(() => {
     axios
-      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
+      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id }, auth)
       .then((response) => {
         setProfileData(response.data.userProfile.address);
         console.log(profileData);

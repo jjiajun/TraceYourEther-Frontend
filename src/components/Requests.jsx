@@ -27,9 +27,13 @@ export default function Requests() {
     setter: useRefresh,
   };
 
+  const token = localStorage.getItem("sessionToken");
+  // create authorization header
+  const auth = { headers: { Authorization: `Bearer ${token}` } };
+
   useEffect(() => {
     axios
-      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
+      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id }, auth)
       .then((response) => {
         console.log("RESP: ", response);
         setFriendList(response.data.userProfile.friends);

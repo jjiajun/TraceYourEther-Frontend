@@ -31,7 +31,8 @@ export default function LoginBox({ user }) {
       }
       // If successful, redirect to home page
       if (response.data.success === true) {
-        const { userId } = response.data;
+        const { userId, token } = response.data;
+        localStorage.setItem("sessionToken", token);
         // On successful login, redirect to home page
         user.userSetter(userId);
         navigate("/");

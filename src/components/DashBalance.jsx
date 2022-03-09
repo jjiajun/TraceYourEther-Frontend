@@ -9,6 +9,9 @@ export default function DashBalance() {
   const [wallet, setWallet] = useState("");
   const id = useContext(userContext);
   const [profileData, setProfileData] = useState("");
+  const token = localStorage.getItem("sessionToken");
+  // create authorization header
+  const auth = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
     getBalance().then((response) => {
@@ -18,7 +21,7 @@ export default function DashBalance() {
     });
 
     axios
-      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
+      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id }, auth)
       .then((response) => {
         setProfileData(response.data.userProfile);
         console.log("hey", profileData);

@@ -10,11 +10,19 @@ export default function InRequest({ oneRequest, allRequest, setter }) {
   const refresh = useContext(refreshContext);
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("sessionToken");
+  // create authorization header
+  const auth = { headers: { Authorization: `Bearer ${token}` } };
+
   useEffect(() => {
     axios
-      .post(`${REACT_APP_BACKEND}/getuserprofilebywallet`, {
-        address: oneRequest.payeeAddress.toString(),
-      })
+      .post(
+        `${REACT_APP_BACKEND}/getuserprofilebywallet`,
+        {
+          address: oneRequest.payeeAddress.toString(),
+        },
+        auth
+      )
       .then((response) => {
         setRequester(response.data.userProfile.name);
       });
@@ -22,9 +30,13 @@ export default function InRequest({ oneRequest, allRequest, setter }) {
 
   useEffect(() => {
     axios
-      .post(`${REACT_APP_BACKEND}/getuserprofilebywallet`, {
-        address: oneRequest.payeeAddress.toString(),
-      })
+      .post(
+        `${REACT_APP_BACKEND}/getuserprofilebywallet`,
+        {
+          address: oneRequest.payeeAddress.toString(),
+        },
+        auth
+      )
       .then((response) => {
         setRequester(response.data.userProfile.name);
       });
