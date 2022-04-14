@@ -1,46 +1,148 @@
 # TraceYourEther
 
-This is a simple project to enable transfer of ETH to different metamask wallets via a react-app.
+A decentralized e-payment app where users can request and approve payment on the Ethereum blockchain!
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+This is the frontend repo. Backend repo can be found [here](https://github.com/jjiajun/TraceYourEther-Project5-Backend).
 
-# Tech Stack
 
-Frontend:
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+    <li>
+      <a href="#usage--features">Usage / Features</a>
+    </li>
+    <li>
+      <a href="#built-with">Built With</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+  </ol>
+</details>
 
-- React
-- Tailwind CSS
-- Ethers.js
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-Backend:
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/90031266/163436724-b09f4c4e-58ca-4d2f-b4c4-aee6e255b7d4.png" />
+</div>
 
-- Mongoose
-- Solidity
-- Hardhat
+<Explain problem we are solving>
 
-Authentication
+We present _**TraceYourEther**_. 
 
-- JWT
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-# Basics
+<!-- USAGE EXAMPLES -->
+## Usage / Features
 
-What is waffle?
+<!-- <div align="center"><img src="https://user-images.githubusercontent.com/40411953/158035858-782bd724-4abb-4458-892e-d9b78ca57667.png" /></div> -->
 
-- It is a library for writing and testing smart contracts.
+<br />1. You can sign up or log in.<br /><br />
 
-What is chai?
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/90031266/163436822-4e8a7914-e3f0-40de-b1b5-961a8a14900d.gif" />
+</div>
 
-- Chai is an assertion library. It makes testing much easier by giving you lots of assertions you can run against your code.
+<br />2. Go to the "Friends" tab to add a friend whom you want to request money from.<br /><br />
 
-Hardhat Introduction.
+<div align="center">
+  <img src="traceyourether-addfriend](https://user-images.githubusercontent.com/90031266/163436952-d75a0240-af30-4fbb-afd7-b92f463a1a8a.gif" />
+</div>
 
-- Every time you're running Hardhat from the CLI, you are running a task. E.g. "npx hardhat compile" is running the "compile" task.
+</div>
 
-What is Mocha
+<br />3. Go to the "Requests" tab to request a payment amount from your friend.<br /><br />
 
-- Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/90031266/163436969-86f0355a-c15e-4322-9222-0f684563f36f.gif" />
+</div>
 
-# How to handle solidity errors
+<br />4. Your friend will see your requests in the "Dashboard" tab.<br /><br />
+
+<div align="center">
+  <img src="" />
+</div>
+
+<br />5. Your friend can choose to accept or reject your request. This process will take some time (> 12s). Solidity uses a proof of work mechanism which takes up significant time to confirm each transaction on the blockchain.<br /><br />
+
+<div align="center">
+  <img src="" />
+</div>
+
+</br>
+
+<br />6. You may go to the "Transactions" tab to check all your past transactions at a glance.<br /><br />
+
+<div align="center">
+  <img src="" />
+</div>
+
+
+## Built With
+
+<strong>Frontend</strong>
+* [React Native](https://reactnative.dev/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [Ethers.js](https://docs.ethers.io/v5/)
+
+<strong>Backend</strong>
+* [Express](https://expressjs.com/)
+* [MongoDB](https://www.mongodb.com/)
+* [Mongoose](https://mongoosejs.com/)
+* [Solidity](https://docs.soliditylang.org/en/v0.8.13/)
+* [Hardhat](https://www.google.com/search?q=hardhat&oq=hardhat&aqs=chrome..69i57j69i59l3j69i60l4.684j0j1&sourceid=chrome&ie=UTF-8)
+
+<strong>Authentication</strong>
+* [JWT](https://jwt.io/)
+
+<strong>Functionality</strong>
+* [Google Cloud Vision](https://cloud.google.com/vision)
+* [Google Cloud Translate](https://cloud.google.com/translate)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+Backend
+
+1. Go to the [backend repo](https://github.com/jjiajun/TraceYourEther-Project5-Backend).
+
+2. Seed the data first: npm run seed
+
+3. Start the backend server: npm run devStart
+
+3. Deploy the local hardhat network
+
+- npx hardhat node (to get 20 test hardhat accounts)
+- npx hardhat run scripts/deploy.js --network localhost (deploy test accounts on localhost)
+
+Frontend
+
+4. Come back to this repo
+
+5. Start the react-app: npm start
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- CONTACT -->
+## Contact
+
+Tristan: [GitHub](https://github.com/jjiajun) - teo.jia.jun.29@gmail.com
+
+Dominique: [GitHub](https://github.com/dominiqueyeo) - dominiqueyeo@hotmail.com
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+## Troubleshooting
 
 Nonce too high error:
 
@@ -50,35 +152,7 @@ If requests are not showing:
 
 - Check that you are using the correct metamask wallet
 
-If metamask wallet address is causing an error:
 
-- Highly likley it is because the address is checksummed while the address you are comparing it to is not
-
-# Unutilized code
-
-How to get all past events:
-
-```
-let eventFilter = contract.filters.EventName();
-let events = await contract.queryFilter(eventFilter);
-events.forEach((e) => {
-console.log(e.args.amount);
-console.log(e.args.description);
-});
-```
-
-# To get this app to work:
-
-1. Seed the data first --> in cryptopay-backend: npm run seed
-
-2. Start the backend server --> in cryptopay-backend: npm run devStart
-
-3. Deploy the local hardhat network
-
-- npx hardhat node (to get 20 test hardhat accounts)
-- npx hardhat run scripts/deploy.js --network localhost (deploy test accounts on localhost)
-
-4. Start the react-app --> in project_5_FE: npm start
 
 ```
 
