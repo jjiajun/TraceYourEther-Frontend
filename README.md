@@ -28,10 +28,11 @@ This is the frontend repo. Backend repo can be found [here](https://github.com/j
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
+<br/>
 <div align="center">
   <img src="https://user-images.githubusercontent.com/90031266/163436724-b09f4c4e-58ca-4d2f-b4c4-aee6e255b7d4.png" width="600px"/>
 </div>
+<br/>
 
 <Explain problem we are solving>
 
@@ -42,18 +43,16 @@ We present _**TraceYourEther**_.
 <!-- USAGE EXAMPLES -->
 ## Usage / Features
 
-<!-- <div align="center"><img src="https://user-images.githubusercontent.com/40411953/158035858-782bd724-4abb-4458-892e-d9b78ca57667.png" /></div> -->
-
 <br />1. You can sign up or log in.<br /><br />
 
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/90031266/163436822-4e8a7914-e3f0-40de-b1b5-961a8a14900d.gif" width="600px" />
+  <img src="https://user-images.githubusercontent.com/90031266/163436822-4e8a7914-e3f0-40de-b1b5-961a8a14900d.gif" width="480px" />
 </div>
 
 <br />2. Go to the "Friends" tab to add a friend whom you want to request money from.<br /><br />
 
 <div align="center">
-  <img src="traceyourether-addfriend](https://user-images.githubusercontent.com/90031266/163436952-d75a0240-af30-4fbb-afd7-b92f463a1a8a.gif" width="600px"/>
+  <img src="traceyourether-addfriend](https://user-images.githubusercontent.com/90031266/163436952-d75a0240-af30-4fbb-afd7-b92f463a1a8a.gif" width="480px"/>
 </div>
 
 </div>
@@ -61,19 +60,19 @@ We present _**TraceYourEther**_.
 <br />3. Go to the "Requests" tab to request a payment amount from your friend.<br /><br />
 
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/90031266/163436969-86f0355a-c15e-4322-9222-0f684563f36f.gif" width="600px" />
+  <img src="https://user-images.githubusercontent.com/90031266/163436969-86f0355a-c15e-4322-9222-0f684563f36f.gif" width="480px" />
 </div>
 
 <br />4. Your friend will see your requests in the "Dashboard" tab.<br /><br />
 
 <div align="center">
-  <img src="" />
+  <img src="https://user-images.githubusercontent.com/90031266/163441114-f9c63f8c-5c7f-4b0e-a77b-855ee4e11b79.gif" width="480px"/>
 </div>
 
 <br />5. Your friend can choose to accept or reject your request. This process will take some time (> 12s). Solidity uses a proof of work mechanism which takes up significant time to confirm each transaction on the blockchain.<br /><br />
 
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/90031266/163440785-3bd28220-159b-4b5e-8460-efde0df0e412.gif" width="600px"/>
+  <img src="https://user-images.githubusercontent.com/90031266/163440785-3bd28220-159b-4b5e-8460-efde0df0e412.gif" width="480px"/>
 </div>
 
 </br>
@@ -81,7 +80,7 @@ We present _**TraceYourEther**_.
 <br />6. You may go to the "Transactions" tab to check all your past transactions at a glance.<br /><br />
 
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/90031266/163440755-12db7233-8341-43e3-a504-8d0ee5961af8.png" width="600px"/>
+  <img src="https://user-images.githubusercontent.com/90031266/163440755-12db7233-8341-43e3-a504-8d0ee5961af8.png" width="480px"/>
 </div>
 
 
