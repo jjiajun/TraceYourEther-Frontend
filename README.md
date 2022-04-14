@@ -34,11 +34,7 @@ This is the frontend repo. Backend repo can be found [here](https://github.com/j
 </div>
 <br/>
 
--Explain problem we are solving-
-
-We present _**TraceYourEther**_. 
-  
--Explain how TraceYourEther solves the problem-
+TraceYourEther provides a decentralized solution for anyone to request payment from friends and family on the Ethereum blockchain.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
