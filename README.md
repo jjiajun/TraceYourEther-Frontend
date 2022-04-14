@@ -52,7 +52,7 @@ We present _**TraceYourEther**_.
 <br />2. Go to the "Friends" tab to add a friend whom you want to request money from.<br /><br />
 
 <div align="center">
-  <img src="traceyourether-addfriend](https://user-images.githubusercontent.com/90031266/163436952-d75a0240-af30-4fbb-afd7-b92f463a1a8a.gif" width="480px"/>
+  <img src="https://user-images.githubusercontent.com/90031266/163436952-d75a0240-af30-4fbb-afd7-b92f463a1a8a.gif" width="480px"/>
 </div>
 
 </div>
