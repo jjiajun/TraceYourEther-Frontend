@@ -34,9 +34,11 @@ This is the frontend repo. Backend repo can be found [here](https://github.com/j
 </div>
 <br/>
 
-<Explain problem we are solving>
+-Explain problem we are solving-
 
 We present _**TraceYourEther**_. 
+  
+-Explain how TraceYourEther solves the problem-
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
