@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { approveRequest } from "../solidityMethods";
 import axios from "axios";
 const { REACT_APP_BACKEND } = process.env;
 
 export default function OutRequest({ oneRequest }) {
   const [requester, setRequester] = useState("");
 
+  const token = localStorage.getItem("sessionToken");
+  // create authorization header
+  const auth = { headers: { Authorization: `Bearer ${token}` } };
+
   useEffect(() => {
     axios
-      .post(`${REACT_APP_BACKEND}/getuserprofilebywallet`, {
-        address: oneRequest.payerAddress.toString(),
-      })
+      .post(
+        `${REACT_APP_BACKEND}/getuserprofilebywallet`,
+        {
+          address: oneRequest.payerAddress.toString(),
+        },
+        auth
+      )
       .then((response) => {
         setRequester(response.data.userProfile.name);
       });

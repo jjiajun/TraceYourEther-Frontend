@@ -11,7 +11,6 @@ export default function DashTransactions() {
   const refresh = useContext(refreshContext);
   useEffect(() => {
     getAllRequestsForPayer().then((response) => {
-      console.log("test", response);
       const existingReqPayer = response.filter(
         (request) => request.completed === true && request.approved === 1
       );
@@ -29,7 +28,6 @@ export default function DashTransactions() {
           fiveTransac.push(holding[i]);
         }
         setTransactionList(fiveTransac);
-        console.log(transactionList);
       });
     });
   }, [refresh.state]);

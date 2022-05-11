@@ -1,12 +1,9 @@
-import axios from "axios";
 import React, { useState, useContext } from "react";
-import { refreshContext, userContext } from "../context";
-import Message from "./Message";
+import { refreshContext } from "../context";
 import { createRequest } from "../solidityMethods";
-const { REACT_APP_BACKEND } = process.env;
+
 
 export default function MakeRequest(friends) {
-  console.log(friends);
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [friendWallet, setFriendWallet] = useState("");
@@ -23,10 +20,8 @@ export default function MakeRequest(friends) {
   const friendOptions = friends.friends.map((friend, index) => (
     <option key={index} value={`${friend.address}`}>{`${friend.name}`}</option>
   ));
-  console.log("fri", friendOptions);
 
   const requestAttempt = () => {
-    console.log("makereq", amount, description, friendWallet);
     createRequest(friendWallet, amount, description).then((response) => {
       setTimeout(() => {
         refresh.setter(!refresh.state);
@@ -66,7 +61,6 @@ export default function MakeRequest(friends) {
         >
           Submit request{" "}
         </button>
-        {/* <Message displayMessage = {message} /> */}
       </div>
     </div>
   );

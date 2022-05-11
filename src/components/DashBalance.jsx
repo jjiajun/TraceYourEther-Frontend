@@ -9,19 +9,20 @@ export default function DashBalance() {
   const [wallet, setWallet] = useState("");
   const id = useContext(userContext);
   const [profileData, setProfileData] = useState("");
+  const token = localStorage.getItem("sessionToken");
+  // create authorization header
+  const auth = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
     getBalance().then((response) => {
-      console.log("lala", response);
       setBalance(response.intBalance / 10 ** 18);
       setWallet(response.userAddress);
     });
 
     axios
-      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
+      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id }, auth)
       .then((response) => {
         setProfileData(response.data.userProfile);
-        console.log("hey", profileData);
       });
   }, []);
 
@@ -34,10 +35,6 @@ export default function DashBalance() {
         </span>
         <span className="text-3xl text-secondary font-bold"> ETH</span>
       </div>
-      {/* <div className="my2">
-        <h5 className="text-base text-gray-300">Wallet Address</h5>
-        <h3>{wallet}</h3>
-      </div> */}
     </div>
   );
 }

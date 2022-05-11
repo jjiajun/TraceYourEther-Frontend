@@ -2,8 +2,7 @@
 
 A decentralized e-payment app where users can request and approve payment on the Ethereum blockchain!
 
-This is the frontend repo. Backend repo can be found [here](https://github.com/jjiajun/TraceYourEther-Backend).
-
+This is the frontend repo. Backend repo can be found [here](https://github.com/jjiajun/TraceYourEther-Project5-Backend).
 
 <!-- TABLE OF CONTENTS -->
 <details>

@@ -12,7 +12,6 @@ import {
 } from "../solidityMethods";
 import { refreshContext } from "../context";
 import Divider from "./Divider";
-import Trial from "./Trial";
 
 const { REACT_APP_BACKEND } = process.env;
 
@@ -27,11 +26,14 @@ export default function Requests() {
     setter: useRefresh,
   };
 
+  const token = localStorage.getItem("sessionToken");
+  // create authorization header
+  const auth = { headers: { Authorization: `Bearer ${token}` } };
+
   useEffect(() => {
     axios
-      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
+      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id }, auth)
       .then((response) => {
-        console.log("RESP: ", response);
         setFriendList(response.data.userProfile.friends);
         console.log(friendList);
       });
@@ -42,13 +44,11 @@ export default function Requests() {
       setInRequestList(existingReq);
     });
     getAllRequestsForPayee().then((response) => {
-      console.log("ALL REQUESTS FOR PAYEE: ", response);
       const existingReq = response.filter(
         (request) => request.completed === false
       );
       setOutRequestList(existingReq);
     });
-    console.log("triggered");
   }, [refresh]);
 
   return (

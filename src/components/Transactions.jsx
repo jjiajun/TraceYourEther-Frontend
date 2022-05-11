@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import TransactionBox from "./TransactionBox";
 import {
   getAllRequestsForPayee,
@@ -8,13 +7,11 @@ import {
 import DashBalance from "./DashBalance";
 import Profile from "./Profile";
 
-const { REACT_APP_BACKEND } = process.env;
 
 export default function Transactions() {
   const [transactionList, setTransactionList] = useState("");
   useEffect(() => {
     getAllRequestsForPayer().then((response) => {
-      console.log("test", response);
       const existingReqPayer = response.filter(
         (request) => request.completed === true && request.approved === 1
       );
@@ -27,7 +24,6 @@ export default function Transactions() {
           return Number(b.noOfSecSinceEpoch) - Number(a.noOfSecSinceEpoch);
         });
         setTransactionList(holding);
-        console.log(transactionList);
       });
     });
   }, []);

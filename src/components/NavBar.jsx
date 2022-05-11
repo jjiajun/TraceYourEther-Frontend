@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import { BiHomeAlt } from "react-icons/bi";
-import { GiTakeMyMoney, GiReceiveMoney } from "react-icons/gi";
+import { GiReceiveMoney } from "react-icons/gi";
 import { BsCashStack } from "react-icons/bs";
 import { FaUserFriends } from "react-icons/fa";
 

@@ -11,10 +11,13 @@ export default function AddFriend() {
   const id = useContext(userContext);
   const [profileData, setProfileData] = useState();
   console.log(id);
+  const token = localStorage.getItem("sessionToken");
+  // create authorization header
+  const auth = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
     axios
-      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
+      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id }, auth)
       .then((response) => {
         console.log(response);
         setProfileData(response.data.userProfile.friends);
@@ -23,6 +26,7 @@ export default function AddFriend() {
   }, []);
 
   console.log(profileData);
+
   return (
     <div className="bg-primary text-white">
       <Profile />

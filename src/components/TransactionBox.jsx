@@ -6,17 +6,18 @@ const { REACT_APP_BACKEND } = process.env;
 
 export default function TransactionBox(transactions) {
   const [idToName, setIdToName] = useState(null);
-  const [payeeName, setPayeeName] = useState("");
-  const [payerName, setPayerName] = useState("");
   const [profileData, setProfileData] = useState();
+
+  const token = localStorage.getItem("sessionToken");
+  // create authorization header
+  const auth = { headers: { Authorization: `Bearer ${token}` } };
+
   useEffect(() => {
-    axios.get(`${REACT_APP_BACKEND}/getallusersdata`).then((response) => {
-      console.log(response.data.allUserData);
+    axios.get(`${REACT_APP_BACKEND}/getallusersdata`, auth).then((response) => {
       const userMapping = {};
       response.data.allUserData.forEach((user, index) => {
         userMapping[`${user.address.toLowerCase()}`] = user.name;
       });
-      console.log(userMapping);
       setIdToName(userMapping);
     });
   }, []);
@@ -24,14 +25,12 @@ export default function TransactionBox(transactions) {
   const id = useContext(userContext);
   useEffect(() => {
     axios
-      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id })
+      .post(`${REACT_APP_BACKEND}/getuserprofilebyid`, { id }, auth)
       .then((response) => {
         setProfileData(response.data.userProfile.address);
-        console.log(profileData);
       });
   }, []);
 
-  console.log("trans", transactions);
   if (!transactions.transactions) return <div />;
   if (!transactions.transactions[0]) {
     return (
